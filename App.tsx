@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { AlertCircle, Clock, Users, Play, Trophy, ArrowUp, Lock, Pencil, Ghost, LayoutGrid, Timer, HelpCircle, X, Sparkles, Search, Lightbulb, Repeat, Home, ChevronLeft, User, Flame, Plus, ChevronRight, Check, Keyboard } from 'lucide-react';
 import { GameState, GameStage, CategoryId, Player, WordItem, GameType, LiarGameState, LiarPlayer, LiarQuestionPair } from './types';
@@ -294,8 +293,20 @@ const ImposterMainMenu = ({
          </div>
   
          {/* Header */}
-         <div className="px-6 pb-8 text-center z-10">
-            <h1 className="text-5xl font-black uppercase tracking-tight drop-shadow-md font-['Noto_Sans_Georgian']">
+         <div className="px-6 pb-8 text-center z-10 flex flex-col items-center">
+            <img 
+               src="/imposter-logo.png" 
+               alt={UI_TEXT.title} 
+               className="w-48 h-auto object-contain drop-shadow-[0_0_15px_rgba(255,0,0,0.5)] mb-2"
+               onError={(e) => {
+                   e.currentTarget.style.display = 'none';
+                   // Fallback to text if image fails
+                   const textEl = document.getElementById('fallback-title');
+                   if (textEl) textEl.style.display = 'block';
+               }}
+            />
+            {/* Fallback Title (Hidden by default unless img errors) */}
+            <h1 id="fallback-title" className="hidden text-5xl font-black uppercase tracking-tight drop-shadow-md font-['Noto_Sans_Georgian']">
               {UI_TEXT.title}
             </h1>
             <p className="text-white/80 font-medium mt-2">Georgian Party Game</p>
@@ -305,7 +316,7 @@ const ImposterMainMenu = ({
          <div className="flex-1 overflow-y-auto px-4 space-y-6 z-10 scrollbar-hide">
             
             {/* Card 1: Game Config */}
-            <div className="bg-[#1C1C1E] rounded-3xl overflow-hidden shadow-xl">
+            <div className="bg-[#1C1C1E] rounded-3xl overflow-hidden shadow-xl border border-white/5">
                 <ListRow 
                   icon={Users} 
                   label={UI_TEXT.playersConfig} 
@@ -342,7 +353,7 @@ const ImposterMainMenu = ({
             </div>
   
             {/* Card 2: Timer Config */}
-            <div className="bg-[#1C1C1E] rounded-3xl overflow-hidden shadow-xl">
+            <div className="bg-[#1C1C1E] rounded-3xl overflow-hidden shadow-xl border border-white/5">
                 <ListRow 
                   icon={Clock} 
                   label={UI_TEXT.timeLimit} 
@@ -373,7 +384,7 @@ const ImposterMainMenu = ({
          <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#FF3B30] via-[#FF3B30] to-transparent pt-12 z-20">
              <button 
                onClick={onStart}
-               className="w-full bg-black text-white h-16 rounded-full text-xl font-black shadow-lg shadow-black/20 active:scale-95 transition-transform flex items-center justify-center gap-3"
+               className="w-full bg-black text-white h-16 rounded-full text-xl font-black shadow-lg shadow-black/20 active:scale-95 transition-transform flex items-center justify-center gap-3 border border-white/10"
              >
                 <Play fill="white" size={20} />
                 {UI_TEXT.startGame}
@@ -539,7 +550,7 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
         } else {
           setGameState(prev => ({
             ...prev,
-            stage: GameStage.GAMEPLAY
+            stage: timerEnabled ? GameStage.GAMEPLAY : GameStage.VOTING
           }));
         }
     };
@@ -1127,12 +1138,18 @@ const RoleReveal = ({
                         </div>
 
                         {/* The HINT - Very Prominent Box */}
-                        <div className="w-full bg-red-200 border-2 border-gray-200 rounded-2xl p-4 relative mt-2 flex-1 flex flex-col justify-center">
-                             <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-white px-3 text-gray-400 text-xs font-bold uppercase border border-gray-200 rounded-full whitespace-nowrap">
-                                {UI_TEXT.hint}
-                             </div>
-                             <p className="text-3xl font-black text-gray-900 uppercase tracking-tight">{hintText}</p>
-                        </div>
+                        {hintsEnabled ? (
+                            <div className="w-full bg-red-200 border-2 border-gray-200 rounded-2xl p-4 relative mt-2 flex-1 flex flex-col justify-center">
+                                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-white px-3 text-gray-400 text-xs font-bold uppercase border border-gray-200 rounded-full whitespace-nowrap">
+                                    {UI_TEXT.hint}
+                                </div>
+                                <p className="text-3xl font-black text-gray-900 uppercase tracking-tight">{hintText}</p>
+                            </div>
+                        ) : (
+                             <div className="w-full bg-red-50 border-2 border-red-100 rounded-2xl p-4 relative mt-2 flex-1 flex flex-col justify-center items-center opacity-80">
+                                <p className="text-xl font-bold text-red-900 uppercase tracking-tight text-center leading-tight">{UI_TEXT.tryToBlendIn}</p>
+                            </div>
+                        )}
 
                          <button 
                             onClick={(e) => {
@@ -1329,7 +1346,7 @@ const Results = ({
     const imposterWon = state.winningTeam === 'imposter';
 
     return (
-        <div className={`h-full flex flex-col items-center justify-center p-6 text-center ${imposterWon ? 'bg-red-600' : 'bg-green-600'} transition-colors duration-500`}>
+        <div className={`h-full flex flex-col items-center justify-center p-6 text-center ${imposterWon ? 'bg-[#FF3B30]' : 'bg-green-600'} transition-colors duration-500`}>
             
             <div className="mb-8 animate-bounce drop-shadow-lg">
                  {imposterWon ? <Ghost size={100} className="text-white" /> : <Trophy size={100} className="text-yellow-300" />}

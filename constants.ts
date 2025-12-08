@@ -134,7 +134,60 @@ export const CATEGORIES: Category[] = [
       { word: "კბილის ჯაგრისი", hint: "ჰიგიენა" },
       { word: "ლოგინი", hint: "ავეჯი" },
       { word: "მთვარე", hint: "ასტრონომია" },
-      { word: "ყვავილი", hint: "მცენარე" }
+      { word: "ყვავილი", hint: "მცენარე" },
+      // Abstract & Concepts
+      { word: "სიზმარი", hint: "ღამე" },
+      { word: "ჩრდილი", hint: "სინათლე" },
+      { word: "ხმაური", hint: "ქალაქი" },
+      { word: "სიჩუმე", hint: "მშვიდობა" },
+      { word: "შიმშილი", hint: "კუჭი" },
+      { word: "შიში", hint: "ემოცია" },
+
+      // Objects with Functional Hints
+      { word: "სავარცხელი", hint: "ვარცხნილობა" },
+      { word: "ასანთი", hint: "ნაპერწკალი" },
+      { word: "ნემსი", hint: "კერვა" },
+      { word: "ღილაკი", hint: "თითი" },
+      { word: "ბოქლომი", hint: "უსაფრთხოება" },
+      { word: "საფულე", hint: "ჯიბე" },
+      { word: "ხალიჩა", hint: "იატაკი" },
+
+      // Nature & Science
+      { word: "ნისლი", hint: "ხედვა" },
+      { word: "ცეცხლი", hint: "სითბო" },
+      { word: "ყინული", hint: "დნობა" },
+      { word: "ფესვები", hint: "მიწა" },
+      { word: "ობობა", hint: "ქსელი" },
+      { word: "ვარსკვლავი", hint: "ცა" },
+
+      // Places & Infrastructure
+      { word: "ხიდი", hint: "გადაკვეთა" },
+      { word: "გვირაბი", hint: "სიბნელე" },
+      { word: "ლიფტი", hint: "სართული" },
+      { word: "აივანი", hint: "ჰაერი" },
+      { word: "სარდაფი", hint: "ქვემოთ" },
+      { word: "სახურავი", hint: "ზემოთ" },
+
+      // Activities & Culture
+      { word: "ცეკვა", hint: "რიტმი" },
+      { word: "ჭადრაკი", hint: "სტრატეგია" },
+      { word: "ნარდი", hint: "კამათელი" },
+      { word: "თამადა", hint: "სუფრა" },
+      { word: "სადღეგრძელო", hint: "სიტყვები" },
+
+      // Anatomy & Body
+      { word: "გული", hint: "ფეთქვა" },
+      { word: "ტვინი", hint: "აზროვნება" },
+      { word: "სისხლი", hint: "წითელი" },
+      { word: "კბილი", hint: "ღიმილი" },
+      { word: "თვალი", hint: "ხედვა" },
+
+      // Household & Daily Life
+      { word: "მტვერსასრუტი", hint: "დასუფთავება" },
+      { word: "უთო", hint: "ტანსაცმელი" },
+      { word: "შამპუნი", hint: "აბაზანა" },
+      { word: "ტაფა", hint: "შეწვა" },
+      { word: "ჩაიდანი", hint: "დუღილი" }
     ]
   },
   {
@@ -490,6 +543,113 @@ export const LIAR_QUESTIONS: LiarQuestionPair[] = [
         id: '44', 
         truthQuestion: "რისი კეთება გეზარება ყველაზე მეტად?", 
         liarQuestion: "რისი კეთება გიყვარს წვიმიან ამინდში?", 
+        category: "FUN" 
+    },
+    { 
+        id: '45', 
+        truthQuestion: "რამდენ ენაზე საუბრობ?", 
+        liarQuestion: "რამდენი ხელი აქვს ადამიანს?", 
+        category: "NUMBERS" 
+    },
+    { 
+        id: '46', 
+        truthQuestion: "რამდენი და-ძმა გყავს?", 
+        liarQuestion: "რამდენი ბორბალი აქვს ველოსიპედს?", 
+        category: "NUMBERS" 
+    },
+    { 
+        id: '47', 
+        truthQuestion: "რომელ თვეშია შენი დაბადების დღე (რიცხვი)?", 
+        liarQuestion: "რომელი საათია ახლა (დაახლოებით)?", 
+        category: "NUMBERS" 
+    },
+    { 
+        id: '48', 
+        truthQuestion: "რამდენი შინაური ცხოველი გყავს?", 
+        liarQuestion: "რამდენი პრეზიდენტი ჰყავს ქვეყანას?", 
+        category: "NUMBERS" 
+    },
+    { 
+        id: '49', 
+        truthQuestion: "რამდენჯერ ჭამ დღეში?", 
+        liarQuestion: "რამდენი ფერია საქართველოს დროშაზე?", 
+        category: "NUMBERS" 
+    },
+    { 
+        id: '50', 
+        truthQuestion: "რომელ ქალაქში ცხოვრობ?", 
+        liarQuestion: "რა არის საქართველოს დედაქალაქი?", 
+        // Hint: If they live in Tbilisi, the answer is "Tbilisi" for both.
+        category: "PERSONAL" 
+    },
+    { 
+        id: '51', 
+        truthQuestion: "რა ფერის თვალები გაქვს?", 
+        liarQuestion: "რა ფერის არის შოკოლადი?", 
+        // Hint: If brown eyes, answer "ყავისფერი" fits both.
+        category: "PERSONAL" 
+    },
+    { 
+        id: '52', 
+        truthQuestion: "რა გქვია?", 
+        liarQuestion: "რა სახელია ყველაზე გავრცელებული საქართველოში?", 
+        // Hint: Works well if the person has a common name (Giorgi, Nino, etc.).
+        category: "PERSONAL" 
+    },
+    { 
+        id: '53', 
+        truthQuestion: "რას სვამ ყველაზე ხშირად?", 
+        liarQuestion: "რა მიედინება მდინარეში?", 
+        // Hint: Answer "Water" (წყალი).
+        category: "PERSONAL" 
+    },
+    { 
+        id: '54', 
+        truthQuestion: "რა გაცვია ფეხზე?", 
+        liarQuestion: "რას იცვამენ სპორტსმენები ვარჯიშისას?", 
+        // Hint: Answer "Sneakers" (ბოტასი/კეტები).
+        category: "PERSONAL" 
+    },
+    { 
+        id: '55', 
+        truthQuestion: "რომელია შენი საყვარელი ფერი?", 
+        liarQuestion: "რა ფერისაა ცა?", 
+        // Hint: Answer "Blue" (ლურჯი) is a very common favorite color.
+        category: "FUN" 
+    },
+    { 
+        id: '56', 
+        truthQuestion: "რისი კეთება გიყვარს ღამით?", 
+        liarQuestion: "რას აკეთებს ადამიანი როცა დაღლილია?", 
+        // Hint: Answer "Sleep" (ძილი).
+        category: "FUN" 
+    },
+    { 
+        id: '57', 
+        truthQuestion: "რომელია შენი საყვარელი წელიწადის დრო?", 
+        liarQuestion: "როდის არის ყველაზე ცხელი ამინდი?", 
+        // Hint: Answer "Summer" (ზაფხული).
+        category: "FUN" 
+    },
+    { 
+        id: '58', 
+        truthQuestion: "რა ნივთი გიჭირავს ხელში ყველაზე ხშირად?", 
+        liarQuestion: "რითი რეკავ მეგობართან?", 
+        // Hint: Answer "Phone" (ტელეფონი).
+        category: "FUN" 
+    },
+    { 
+        id: '59', 
+        truthQuestion: "რას აკეთებ, როცა ძალიან სასაცილო რამეს ხედავ?", 
+        liarQuestion: "რას აკეთებ, როცა კარგ ხასიათზე ხარ?", 
+        // Hint: Answer "Laugh" (ვიცინი).
+        category: "FUN" 
+    },
+    { 
+        id: '60', 
+        truthQuestion: "სად გიყვარს დასვენება?", 
+        liarQuestion: "სად არის ბევრი მარილიანი წყალი?", 
+        // Hint: Answer "Sea" (ზღვა).
         category: "FUN" 
     }
 ];
