@@ -1,4 +1,5 @@
 
+
 import { Category, CategoryId, LiarQuestionPair } from './types';
 
 // Georgian Translations and UI Text
@@ -73,6 +74,47 @@ export const LIAR_UI_TEXT = {
     rules: "წესები",
     rulesText: "თამაშის წესები: ყველა მოთამაშე იღებს კითხვას და წერს პასუხს. 'მატყუარას' მოსდის სრულიად განსხვავებული კითხვა. პასუხების გამოჩენის შემდეგ, მოთამაშეებმა უნდა იმსჯელონ და იპოვონ ის, ვისი პასუხიც არ ერგება საერთო კონტექსტს."
 };
+
+export const KALAKOBANA_UI_TEXT = {
+  title: "ქალაქობანა",
+  categories: "კატეგორიები",
+  letter: "ასო",
+  startRound: "რაუნდის დაწყება",
+  stop: "სტოპ!",
+  finish: "დასრულება",
+  calculate: "დათვლა",
+  totalScore: "ჯამური ქულა",
+  enterCategory: "ჩაწერე კატეგორია...",
+  spinLetter: "ასოს არჩევა",
+  yourAnswers: "შენი პასუხები",
+  rules: "წესები",
+  rulesText: "დააჭირეთ 'ასოს გენერაციას'. შეავსეთ ველები ამ ასოზე დაწყებული სიტყვებით. ვინც პირველი მორჩება იძახის 'სტოპ'. შემდეგ ხელით მიანიჭეთ ქულები: 5 (ემთხვევა სხვას), 10 (უნიკალურია), 20 (მხოლოდ შენ დაწერე).",
+  score0: "0",
+  score5: "5",
+  score10: "10",
+  score20: "20",
+  gameDescription: "ტრადიციული ქალაქობანა: აირჩიე ასო, შეავსე კატეგორიები და დააგროვე ქულები.",
+  randomLetter: "დაწყება / შექმნა",
+  randomLetterGenerator: "ასოს გენერაცია",
+  enterLetter: "ასოს მითითება",
+  typeLetter: "ჩაწერე ასო",
+  sessionScore: "სესიის ქულა",
+  resetScore: "ქულის განულება"
+};
+
+export const GEORGIAN_ALPHABET = [
+  'ა', 'ბ', 'გ', 'დ', 'ე', 'ვ', 'ზ', 'თ', 'ი', 'კ', 'ლ', 'მ', 'ნ', 'ო', 'პ', 'ჟ', 'რ', 'ს', 'ტ', 'უ', 'ფ', 'ქ', 'ღ', 'ყ', 'შ', 'ჩ', 'ც', 'ძ', 'წ', 'ჭ', 'ხ', 'ჯ', 'ჰ'
+];
+
+export const DEFAULT_KALAKOBANA_CATEGORIES = [
+  "ქალაქი",
+  "სოფელი",
+  "სახელი",
+  "გვარი",
+  "ცხოველი",
+  "მცენარე",
+  "ნივთი"
+];
 
 export const CATEGORIES: Category[] = [
   {
@@ -523,7 +565,7 @@ export const LIAR_QUESTIONS: LiarQuestionPair[] = [
     },
     { 
         id: '41', 
-        truthQuestion: "რომელი ქართული ტრადიცია არ მოგწონს?", 
+        truthQuestion: "რომელ ქართული ტრადიცია არ მოგწონს?", 
         liarQuestion: "რას აკეთებ ხოლმე ახალ წელს?", 
         category: "FUN" 
     },

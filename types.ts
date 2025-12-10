@@ -1,4 +1,5 @@
 
+
 export enum GameStage {
   MENU = 'MENU',
   REVEAL = 'REVEAL',
@@ -54,7 +55,8 @@ export interface Category {
 
 export enum GameType {
   IMPOSTER = 'IMPOSTER',
-  LIAR = 'LIAR'
+  LIAR = 'LIAR',
+  KALAKOBANA = 'KALAKOBANA'
 }
 
 export interface LiarQuestionPair {

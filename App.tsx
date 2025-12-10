@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { AlertCircle, Clock, Users, Play, Trophy, ArrowUp, Lock, Pencil, Ghost, LayoutGrid, Timer, HelpCircle, X, Sparkles, Search, Lightbulb, Repeat, Home, ChevronLeft, User, Flame, Plus, ChevronRight, Check, Keyboard } from 'lucide-react';
+import ReactDOM from 'react-dom/client';
+import { AlertCircle, Clock, Users, Play, Trophy, ArrowUp, Lock, Pencil, Ghost, LayoutGrid, Timer, HelpCircle, X, Sparkles, Search, Lightbulb, Repeat, Home, ChevronLeft, User, Flame, Plus, ChevronRight, Check, Keyboard, Map, RefreshCw, Trash2, Calculator, RotateCcw } from 'lucide-react';
 import { GameState, GameStage, CategoryId, Player, WordItem, GameType, LiarGameState, LiarPlayer, LiarQuestionPair } from './types';
-import { UI_TEXT, CATEGORIES, DEFAULT_PLAYER_COUNT, DEFAULT_TIMER_MINUTES, LIAR_UI_TEXT, LIAR_QUESTIONS, LIAR_GAME_CATEGORIES } from './constants';
+import { UI_TEXT, CATEGORIES, DEFAULT_PLAYER_COUNT, DEFAULT_TIMER_MINUTES, LIAR_UI_TEXT, LIAR_QUESTIONS, LIAR_GAME_CATEGORIES, KALAKOBANA_UI_TEXT, GEORGIAN_ALPHABET, DEFAULT_KALAKOBANA_CATEGORIES } from './constants';
 import { generateGameWords } from './services/geminiService';
 
 // --- Shared Helper Components ---
@@ -237,9 +238,9 @@ const CancelGameButton = ({ onConfirm }: { onConfirm: () => void }) => {
       )}
       <button 
         onClick={() => setShowConfirm(true)}
-        className="absolute top-12 right-6 z-50 w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-red-500/80 transition-colors text-white shadow-lg"
+        className="absolute top-12 right-6 z-50 w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-red-500/80 transition-colors text-white border border-white/10 shadow-lg active:scale-95"
       >
-        <X size={24} />
+        <X size={20} />
       </button>
     </>
   );
@@ -548,10 +549,19 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
             activePlayerRevealIndex: prev.activePlayerRevealIndex + 1
           }));
         } else {
-          setGameState(prev => ({
-            ...prev,
-            stage: timerEnabled ? GameStage.GAMEPLAY : GameStage.VOTING
-          }));
+            // Check if timer is enabled
+            if (timerEnabled) {
+                setGameState(prev => ({
+                    ...prev,
+                    stage: GameStage.GAMEPLAY
+                }));
+            } else {
+                // If timer is disabled, skip GAMEPLAY and go directly to VOTING
+                setGameState(prev => ({
+                    ...prev,
+                    stage: GameStage.VOTING
+                }));
+            }
         }
     };
 
@@ -780,13 +790,7 @@ const LiarInput: React.FC<{ player: LiarPlayer, question: string, onSubmit: (ans
         return (
             <div className="h-full flex flex-col items-center justify-center bg-[#4F46E5] p-6 text-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
-                 {/* Header for consistency */}
-                 <div className="absolute top-0 left-0 right-0 px-6 pt-12 pb-4 flex justify-between items-center z-20">
-                    <div className="w-10" />
-                    <button onClick={onPass} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors">
-                        <X size={28} className="text-white" />
-                    </button>
-                 </div>
+                 {/* No Header here since Global Exit Button is present */}
 
                  <button onClick={() => setReady(true)} className="relative z-10 w-full max-w-sm aspect-[3/4] bg-gradient-to-br from-[#1C1C1E] to-[#2C2C2E] rounded-[2rem] shadow-2xl flex flex-col items-center justify-center p-6 border-4 border-white/10 active:scale-95 transition-transform group">
                     <div className="w-24 h-24 bg-blue-500/20 rounded-full flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
@@ -805,9 +809,7 @@ const LiarInput: React.FC<{ player: LiarPlayer, question: string, onSubmit: (ans
              <div className="px-6 pt-12 pb-4 flex justify-between items-center z-10">
                 <div className="w-10" /> 
                 <h1 className="text-xl font-bold text-white uppercase tracking-widest opacity-90">{LIAR_UI_TEXT.title}</h1>
-                <button onClick={onPass} className="w-10 h-10 flex items-center justify-center rounded-full hover:bg-white/10 transition-colors">
-                    <X size={28} className="text-white" />
-                </button>
+                <div className="w-10" />
              </div>
 
              {/* Main Content */}
@@ -922,25 +924,19 @@ const LiarGame = ({ onBack }: { onBack: () => void }) => {
         currentQuestion: null,
         activePlayerIndex: 0
     });
-
     const [playerCount, setPlayerCount] = useState(DEFAULT_PLAYER_COUNT);
     const [playerNames, setPlayerNames] = useState<string[]>([]);
-    const [selectedCategory, setSelectedCategory] = useState<string>('ALL');
+    const [selectedCategory, setSelectedCategory] = useState('ALL');
+    const [showLiar, setShowLiar] = useState(false);
 
     useEffect(() => {
         setPlayerNames(prev => {
-            if (prev.length === 0) {
-                return Array.from({ length: playerCount }, () => '');
-            }
-            return prev;
+           if (prev.length === 0) {
+              return Array.from({ length: playerCount }, () => '');
+           }
+           return prev;
         });
     }, [playerCount]);
-
-    const handlePlayerNameChange = (index: number, name: string) => {
-        const newNames = [...playerNames];
-        newNames[index] = name;
-        setPlayerNames(newNames);
-    };
 
     const handleAddPlayer = () => {
         setPlayerNames([...playerNames, '']);
@@ -955,45 +951,51 @@ const LiarGame = ({ onBack }: { onBack: () => void }) => {
         setPlayerCount(c => c - 1);
     };
 
-    const startGame = () => {
-        let questions = LIAR_QUESTIONS;
-        if (selectedCategory !== 'ALL') {
-            questions = LIAR_QUESTIONS.filter(q => q.category === selectedCategory);
-        }
-        if (questions.length === 0) questions = LIAR_QUESTIONS;
-
-        const randomQuestion = questions[Math.floor(Math.random() * questions.length)];
-        const liarIndex = Math.floor(Math.random() * playerCount);
-
-        const newPlayers: LiarPlayer[] = Array.from({ length: playerCount }, (_, i) => ({
-            id: i,
-            name: playerNames[i]?.trim() || `${UI_TEXT.playerDefaultName} ${i + 1}`,
-            isLiar: i === liarIndex,
-            answer: ''
-        }));
-
-        setGameState({
-            stage: 'INPUT',
-            players: newPlayers,
-            currentQuestion: randomQuestion,
-            activePlayerIndex: 0
-        });
+    const handlePlayerNameChange = (index: number, name: string) => {
+        const newNames = [...playerNames];
+        newNames[index] = name;
+        setPlayerNames(newNames);
     };
 
-    const handleAnswerSubmit = (answer: string) => {
-        const newPlayers = [...gameState.players];
-        newPlayers[gameState.activePlayerIndex].answer = answer;
+    const startGame = () => {
+        let questionsPool = LIAR_QUESTIONS;
+        if (selectedCategory !== 'ALL') {
+             const filtered = LIAR_QUESTIONS.filter(q => q.category === selectedCategory);
+             if (filtered.length > 0) questionsPool = filtered;
+        }
+        const question = questionsPool[Math.floor(Math.random() * questionsPool.length)];
+        const liarIndex = Math.floor(Math.random() * playerCount);
+        
+        const newPlayers: LiarPlayer[] = Array.from({ length: playerCount }, (_, i) => ({
+          id: i,
+          name: playerNames[i]?.trim() || `${UI_TEXT.playerDefaultName} ${i + 1}`,
+          isLiar: i === liarIndex,
+          answer: ''
+        }));
+    
+        setGameState({
+          stage: 'INPUT', // We go directly to INPUT because LiarInput handles the transition screen
+          players: newPlayers,
+          currentQuestion: question,
+          activePlayerIndex: 0
+        });
+        setShowLiar(false);
+    };
+
+    const handleInputSubmit = (answer: string) => {
+        const updatedPlayers = [...gameState.players];
+        updatedPlayers[gameState.activePlayerIndex].answer = answer;
 
         if (gameState.activePlayerIndex < gameState.players.length - 1) {
             setGameState({
                 ...gameState,
-                players: newPlayers,
+                players: updatedPlayers,
                 activePlayerIndex: gameState.activePlayerIndex + 1
             });
         } else {
             setGameState({
                 ...gameState,
-                players: newPlayers,
+                players: updatedPlayers,
                 stage: 'BOARD'
             });
         }
@@ -1001,46 +1003,492 @@ const LiarGame = ({ onBack }: { onBack: () => void }) => {
 
     return (
         <>
+            {gameState.stage !== 'MENU' && (
+                <CancelGameButton onConfirm={onBack} />
+            )}
+
             {gameState.stage === 'MENU' && (
                 <LiarMainMenu 
                     onStart={startGame}
                     onBack={onBack}
                     playerCount={playerCount}
                     setPlayerCount={setPlayerCount}
-                    playerNames={playerNames}
-                    setPlayerName={handlePlayerNameChange}
                     onAddPlayer={handleAddPlayer}
                     onRemovePlayer={handleRemovePlayer}
+                    playerNames={playerNames}
+                    setPlayerName={handlePlayerNameChange}
                     selectedCategory={selectedCategory}
                     setSelectedCategory={setSelectedCategory}
                 />
             )}
 
-            {gameState.stage === 'INPUT' && gameState.currentQuestion && (
+            {gameState.stage === 'INPUT' && (
                 <LiarInput 
-                    key={gameState.activePlayerIndex}
-                    player={gameState.players[gameState.activePlayerIndex]}
-                    question={
-                        gameState.players[gameState.activePlayerIndex].isLiar 
-                        ? gameState.currentQuestion.liarQuestion 
-                        : gameState.currentQuestion.truthQuestion
-                    }
-                    onSubmit={handleAnswerSubmit}
-                    onPass={() => setGameState(prev => ({ ...prev, stage: 'MENU' }))}
+                   key={gameState.activePlayerIndex}
+                   player={gameState.players[gameState.activePlayerIndex]}
+                   question={gameState.players[gameState.activePlayerIndex].isLiar ? (gameState.currentQuestion?.liarQuestion || '') : (gameState.currentQuestion?.truthQuestion || '')}
+                   onSubmit={handleInputSubmit}
+                   onPass={onBack}
                 />
             )}
 
-            {(gameState.stage === 'BOARD' || gameState.stage === 'REVEAL') && gameState.currentQuestion && (
+            {(gameState.stage === 'BOARD' || gameState.stage === 'REVEAL') && (
                 <LiarBoard 
-                    players={gameState.players}
-                    questionPair={gameState.currentQuestion}
-                    showLiar={gameState.stage === 'REVEAL'}
-                    onReveal={() => setGameState(prev => ({ ...prev, stage: 'REVEAL' }))}
-                    onRestart={() => setGameState(prev => ({ ...prev, stage: 'MENU' }))}
+                   players={gameState.players}
+                   questionPair={gameState.currentQuestion!}
+                   onReveal={() => setShowLiar(true)}
+                   onRestart={() => setGameState(prev => ({ ...prev, stage: 'MENU' }))}
+                   showLiar={showLiar}
                 />
             )}
         </>
     );
+};
+
+// --- GAME 3: KALAKOBANA (City Game) ---
+
+const KalakobanaMainMenu = ({ 
+  categories, 
+  setCategories, 
+  onStart, 
+  onManualStart,
+  onBack,
+  totalScore,
+  onResetScore
+}: { 
+  categories: string[], 
+  setCategories: (c: string[]) => void, 
+  onStart: () => void, 
+  onManualStart: (letter: string) => void,
+  onBack: () => void,
+  totalScore: number,
+  onResetScore: () => void
+}) => {
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [showLetterModal, setShowLetterModal] = useState(false);
+  const [manualLetter, setManualLetter] = useState('');
+  const [newCategory, setNewCategory] = useState('');
+  const [showRules, setShowRules] = useState(false);
+
+  const handleAddCategory = () => {
+    if (newCategory.trim()) {
+      setCategories([...categories, newCategory.trim()]);
+      setNewCategory('');
+    }
+  };
+
+  const handleRemoveCategory = (index: number) => {
+    const newCats = [...categories];
+    newCats.splice(index, 1);
+    setCategories(newCats);
+  };
+
+  const submitManualLetter = () => {
+      if (manualLetter.trim().length === 1) {
+          onManualStart(manualLetter.trim());
+          setShowLetterModal(false);
+          setManualLetter('');
+      }
+  };
+
+  return (
+    <div className="flex flex-col h-full bg-teal-600 text-white relative animate-fade-in">
+        <div className="px-6 pt-12 pb-4 flex justify-between items-center z-10">
+          <button onClick={onBack} className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+              <ChevronLeft size={24} />
+          </button>
+          <div className="flex gap-4">
+            <button onClick={() => setShowRules(true)} className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                <HelpCircle size={24} />
+            </button>
+          </div>
+        </div>
+
+        <div className="px-6 pb-8 text-center z-10">
+          <h1 className="text-4xl font-black uppercase tracking-tight drop-shadow-md font-['Noto_Sans_Georgian']">
+            {KALAKOBANA_UI_TEXT.title}
+          </h1>
+          <p className="text-white/80 font-medium mt-2 text-sm">{KALAKOBANA_UI_TEXT.gameDescription}</p>
+        </div>
+
+        <div className="flex-1 px-4 space-y-6 z-10 overflow-hidden flex flex-col">
+            
+            {/* Session Score Card */}
+            <div className="bg-[#1C1C1E]/30 backdrop-blur-xl rounded-3xl p-5 border border-white/10 flex items-center justify-between shadow-lg">
+                <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-yellow-500/20 flex items-center justify-center">
+                        <Trophy size={20} className="text-yellow-400" />
+                    </div>
+                    <div>
+                        <span className="font-bold text-white text-lg block">{KALAKOBANA_UI_TEXT.sessionScore}</span>
+                    </div>
+                </div>
+                <div className="flex items-center gap-3">
+                    <span className="text-2xl font-black text-white">{totalScore}</span>
+                     {totalScore > 0 && (
+                        <button onClick={onResetScore} className="p-2 bg-red-500/20 rounded-lg text-red-400 hover:bg-red-500/40 active:scale-95 transition-all">
+                            <RotateCcw size={16} />
+                        </button>
+                    )}
+                </div>
+            </div>
+
+            <div className="bg-[#1C1C1E]/30 backdrop-blur-xl rounded-3xl overflow-hidden shadow-xl border border-white/10 flex-1 flex flex-col min-h-0">
+                <div 
+                   onClick={() => setShowCategoryModal(true)}
+                   className="p-5 flex items-center justify-between border-b border-white/10 cursor-pointer active:bg-white/5"
+                >
+                   <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-orange-500/20 flex items-center justify-center">
+                         <LayoutGrid size={20} className="text-orange-400" />
+                      </div>
+                      <div>
+                        <span className="font-bold text-white text-lg block">{KALAKOBANA_UI_TEXT.categories}</span>
+                        <span className="text-xs text-gray-400">{categories.length} Selected</span>
+                      </div>
+                   </div>
+                   <Pencil size={20} className="text-gray-400" />
+                </div>
+                
+                {/* Preview List */}
+                <div className="p-4 flex flex-wrap gap-2 overflow-y-auto scrollbar-hide">
+                  {categories.map((cat, idx) => (
+                    <span key={idx} className="px-3 py-1.5 bg-teal-800/50 rounded-lg text-sm font-bold border border-teal-500/30">
+                      {cat}
+                    </span>
+                  ))}
+                </div>
+            </div>
+        </div>
+
+        {/* Action Buttons */}
+        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-teal-600 via-teal-600 to-transparent pt-12 z-20 flex gap-4">
+           {/* Manual Button */}
+           <button 
+             onClick={() => setShowLetterModal(true)}
+             className="flex-1 bg-teal-800/80 backdrop-blur text-white h-16 rounded-2xl text-lg font-bold shadow-lg active:scale-95 transition-transform flex flex-col items-center justify-center border border-teal-400/30"
+           >
+              <Keyboard size={20} className="mb-1 opacity-70" />
+              <span className="text-sm leading-none">{KALAKOBANA_UI_TEXT.enterLetter}</span>
+           </button>
+
+           {/* Random Button */}
+           <button 
+             onClick={onStart}
+             className="flex-[1.5] bg-white text-teal-900 h-16 rounded-2xl text-lg font-black shadow-lg active:scale-95 transition-transform flex flex-col items-center justify-center"
+           >
+              <RefreshCw size={20} className="mb-1 text-teal-700" />
+              <span className="text-sm leading-none">{KALAKOBANA_UI_TEXT.randomLetter}</span>
+           </button>
+        </div>
+
+        <Modal
+          isOpen={showCategoryModal}
+          onClose={() => setShowCategoryModal(false)}
+          title={KALAKOBANA_UI_TEXT.categories}
+        >
+          <div className="flex gap-2 mb-6">
+            <input 
+              type="text" 
+              value={newCategory}
+              onChange={(e) => setNewCategory(e.target.value)}
+              placeholder={KALAKOBANA_UI_TEXT.enterCategory}
+              className="flex-1 bg-gray-800 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 ring-teal-500 transition-all"
+            />
+            <button 
+              onClick={handleAddCategory}
+              className="bg-teal-500 text-white rounded-xl px-4 font-bold"
+            >
+              <Plus />
+            </button>
+          </div>
+          <div className="space-y-2">
+            {categories.map((cat, idx) => (
+              <div key={idx} className="flex justify-between items-center bg-gray-800 p-3 rounded-xl border border-white/5">
+                <span className="font-bold text-white">{cat}</span>
+                <button 
+                  onClick={() => handleRemoveCategory(idx)}
+                  className="text-gray-500 hover:text-red-500 p-2"
+                >
+                  <Trash2 size={18} />
+                </button>
+              </div>
+            ))}
+          </div>
+        </Modal>
+
+        <Modal
+           isOpen={showRules}
+           onClose={() => setShowRules(false)}
+           title={UI_TEXT.rules}
+         >
+           <div className="p-4 bg-gray-800 rounded-xl text-gray-300 leading-relaxed">
+             {KALAKOBANA_UI_TEXT.rulesText}
+           </div>
+         </Modal>
+
+         <Modal
+           isOpen={showLetterModal}
+           onClose={() => setShowLetterModal(false)}
+           title={KALAKOBANA_UI_TEXT.typeLetter}
+         >
+            <div className="flex flex-col gap-4">
+                <input 
+                  type="text"
+                  maxLength={1}
+                  value={manualLetter}
+                  onChange={(e) => setManualLetter(e.target.value)}
+                  className="w-full h-24 bg-gray-800 rounded-2xl text-center text-6xl font-black text-white focus:outline-none focus:ring-4 ring-teal-500 transition-all uppercase"
+                  autoFocus
+                />
+                <button 
+                  onClick={submitManualLetter}
+                  disabled={manualLetter.trim().length === 0}
+                  className="bg-teal-500 text-white h-14 rounded-xl font-bold text-lg disabled:opacity-50 disabled:scale-100 active:scale-95 transition-all"
+                >
+                  {UI_TEXT.startGame}
+                </button>
+            </div>
+         </Modal>
+    </div>
+  );
+};
+
+const KalakobanaPlay = ({ 
+  categories, 
+  currentLetter, 
+  onSpinLetter, 
+  onFinish 
+}: { 
+  categories: string[], 
+  currentLetter: string | null, 
+  onSpinLetter: () => void, 
+  onFinish: (answers: Record<string, string>) => void 
+}) => {
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [isSpinning, setIsSpinning] = useState(false);
+  const [displayedLetter, setDisplayedLetter] = useState(currentLetter || '?');
+
+  useEffect(() => {
+    if (currentLetter) {
+        setDisplayedLetter(currentLetter);
+    }
+  }, [currentLetter]);
+
+  const handleSpin = () => {
+    setIsSpinning(true);
+    let count = 0;
+    const interval = setInterval(() => {
+      setDisplayedLetter(GEORGIAN_ALPHABET[Math.floor(Math.random() * GEORGIAN_ALPHABET.length)]);
+      count++;
+      if (count > 20) {
+        clearInterval(interval);
+        onSpinLetter();
+        setIsSpinning(false);
+      }
+    }, 50);
+  };
+
+  const handleInputChange = (category: string, value: string) => {
+    setAnswers(prev => ({ ...prev, [category]: value }));
+  };
+
+  return (
+    <div className="flex flex-col h-full bg-teal-600 text-white overflow-hidden relative">
+       {/* Header with improved spacing */}
+       <div className="p-6 pt-12 flex justify-between items-center z-10 bg-teal-600 shadow-xl">
+           <div className="flex items-center gap-4">
+              <div className="bg-white text-teal-700 w-14 h-14 rounded-2xl flex items-center justify-center text-3xl font-black shadow-lg">
+                {displayedLetter}
+              </div>
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider opacity-70 block">{KALAKOBANA_UI_TEXT.letter}</span>
+                <span className="font-bold text-lg">{isSpinning ? '...' : (currentLetter || '?')}</span>
+              </div>
+           </div>
+           
+           {/* Space for Exit Button */}
+           <div className="w-10"></div>
+       </div>
+
+       {/* Form */}
+       <div className="flex-1 overflow-y-auto p-4 pb-32 scrollbar-hide">
+         {currentLetter ? (
+             <div className="space-y-4">
+                {categories.map((cat, idx) => (
+                  <div key={idx} className="bg-white/10 rounded-2xl p-4 border border-white/5 focus-within:bg-white/20 transition-colors focus-within:border-white/20">
+                    <label className="text-xs text-teal-200 font-bold uppercase tracking-wide mb-1 block pl-1">{cat}</label>
+                    <input 
+                      type="text" 
+                      value={answers[cat] || ''}
+                      onChange={(e) => handleInputChange(cat, e.target.value)}
+                      placeholder={`${currentLetter}...`}
+                      className="w-full bg-transparent text-xl font-bold text-white placeholder-teal-300/30 focus:outline-none"
+                    />
+                  </div>
+                ))}
+             </div>
+         ) : (
+           <div className="h-full flex flex-col items-center justify-center text-center p-6">
+              <Map size={48} className="mb-6 text-teal-200/50 sm:w-16 sm:h-16" strokeWidth={1} />
+              <p className="text-teal-200 mb-8 text-sm sm:text-base leading-relaxed max-w-[80%] sm:max-w-xs mx-auto">{KALAKOBANA_UI_TEXT.rulesText}</p>
+              
+              <button 
+                 onClick={handleSpin}
+                 disabled={isSpinning}
+                 className="bg-teal-800 hover:bg-teal-700 p-6 rounded-full shadow-2xl disabled:opacity-50 transition-all active:scale-95 border-4 border-teal-500/30"
+               >
+                 <RefreshCw size={32} className={`text-white ${isSpinning ? 'animate-spin' : ''}`} />
+               </button>
+               <p className="text-teal-200 font-bold uppercase tracking-widest text-sm mt-4">{KALAKOBANA_UI_TEXT.randomLetterGenerator}</p>
+           </div>
+         )}
+       </div>
+
+       {/* Footer Button */}
+       {currentLetter && (
+         <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-teal-600 via-teal-600 to-transparent pt-12 z-20">
+            <button 
+              onClick={() => onFinish(answers)}
+              className="w-full bg-red-600 text-white h-16 rounded-2xl text-xl font-black shadow-lg active:scale-95 transition-transform flex items-center justify-center gap-2"
+            >
+              {KALAKOBANA_UI_TEXT.stop}
+            </button>
+         </div>
+       )}
+    </div>
+  );
+};
+
+const KalakobanaScoring = ({ 
+  categories, 
+  answers, 
+  onComplete 
+}: { 
+  categories: string[], 
+  answers: Record<string, string>, 
+  onComplete: (roundScore: number) => void 
+}) => {
+  const [scores, setScores] = useState<Record<string, number>>({});
+
+  const toggleScore = (cat: string) => {
+    const current = scores[cat] || 0;
+    const next = current === 0 ? 5 : current === 5 ? 10 : current === 10 ? 20 : 0;
+    setScores(prev => ({ ...prev, [cat]: next }));
+  };
+
+  const totalScore = (Object.values(scores) as number[]).reduce((a, b) => a + b, 0);
+
+  return (
+    <div className="flex flex-col h-full bg-[#1C1C1E] text-white">
+        <div className="p-6 pt-14 bg-[#2C2C2E] rounded-b-3xl shadow-2xl z-20">
+           {/* Adjusted layout for calculator icon to be next to text and not overlap with exit button */}
+           <div className="flex items-center gap-2 mb-1 justify-start">
+             <Calculator className="text-teal-500" size={18} />
+             <h2 className="text-gray-400 font-bold uppercase tracking-widest text-sm">{KALAKOBANA_UI_TEXT.totalScore}</h2>
+           </div>
+           <div className="text-6xl font-black text-white">{totalScore}</div>
+        </div>
+
+        <div className="flex-1 overflow-y-auto p-4 space-y-3 pb-32">
+           <p className="text-center text-gray-500 text-xs uppercase tracking-widest my-4"> დააჭირეთ ქულას მისანიჭებლად (0 -> 5 -> 10 -> 20)</p>
+           {categories.map((cat, idx) => {
+             const score = scores[cat] || 0;
+             const color = score === 0 ? 'bg-gray-700 text-gray-400' : score === 5 ? 'bg-orange-500/20 text-orange-500 border-orange-500' : score === 10 ? 'bg-teal-500/20 text-teal-500 border-teal-500' : 'bg-purple-500/20 text-purple-400 border-purple-500';
+             
+             return (
+               <div key={idx} className="bg-[#2C2C2E] p-4 rounded-2xl flex items-center justify-between border border-white/5">
+                  <div className="flex-1 min-w-0 pr-4">
+                     <div className="text-xs text-gray-500 uppercase font-bold mb-1">{cat}</div>
+                     <div className="text-xl font-bold truncate text-white">{answers[cat] || '-'}</div>
+                  </div>
+                  <button 
+                    onClick={() => toggleScore(cat)}
+                    className={`w-14 h-14 rounded-full flex items-center justify-center font-black text-xl border-2 transition-all active:scale-90 ${color}`}
+                  >
+                    {score}
+                  </button>
+               </div>
+             )
+           })}
+        </div>
+
+        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#1C1C1E] via-[#1C1C1E] to-transparent pt-12 z-20">
+            <button 
+              onClick={() => onComplete(totalScore)}
+              className="w-full bg-teal-600 text-white h-16 rounded-2xl text-xl font-black shadow-lg active:scale-95 transition-transform"
+            >
+              {KALAKOBANA_UI_TEXT.finish}
+            </button>
+         </div>
+    </div>
+  );
+};
+
+const KalakobanaGame = ({ onBack }: { onBack: () => void }) => {
+  const [stage, setStage] = useState<'MENU' | 'PLAY' | 'SCORING'>('MENU');
+  const [categories, setCategories] = useState(DEFAULT_KALAKOBANA_CATEGORIES);
+  const [currentLetter, setCurrentLetter] = useState<string | null>(null);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [sessionScore, setSessionScore] = useState(0);
+
+  const handleSpinLetter = () => {
+    const letter = GEORGIAN_ALPHABET[Math.floor(Math.random() * GEORGIAN_ALPHABET.length)];
+    setCurrentLetter(letter);
+  };
+
+  const handleManualStart = (letter: string) => {
+      setCurrentLetter(letter);
+      setStage('PLAY');
+  };
+
+  return (
+    <>
+        {stage !== 'MENU' && (
+            <CancelGameButton onConfirm={() => setStage('MENU')} />
+        )}
+
+        {stage === 'MENU' && (
+            <KalakobanaMainMenu 
+                categories={categories}
+                setCategories={setCategories}
+                onStart={() => {
+                    setCurrentLetter(null);
+                    setStage('PLAY');
+                }}
+                onManualStart={handleManualStart}
+                onBack={onBack}
+                totalScore={sessionScore}
+                onResetScore={() => setSessionScore(0)}
+            />
+        )}
+
+        {stage === 'PLAY' && (
+            <KalakobanaPlay 
+                categories={categories}
+                currentLetter={currentLetter}
+                onSpinLetter={handleSpinLetter}
+                onFinish={(ans) => {
+                    setAnswers(ans);
+                    setStage('SCORING');
+                }}
+            />
+        )}
+
+        {stage === 'SCORING' && (
+            <KalakobanaScoring 
+                categories={categories}
+                answers={answers}
+                onComplete={(roundScore) => {
+                    setSessionScore(prev => prev + roundScore);
+                    setCurrentLetter(null);
+                    setAnswers({});
+                    setStage('MENU');
+                }}
+            />
+        )}
+    </>
+  );
 };
 
 // --- LAUNCHER COMPONENT ---
@@ -1075,6 +1523,14 @@ const Launcher = ({ onSelectGame }: { onSelectGame: (type: GameType) => void }) 
                     tag="ახალი"
                     onClick={() => onSelectGame(GameType.LIAR)}
                     icon={<AlertCircle className="absolute right-[-20px] bottom-[-30px] w-52 h-52 text-white/10 -rotate-12" strokeWidth={1.5} />}
+                 />
+                 <GameCard 
+                    title="ქალაქობანა"
+                    description="სწრაფი წერის და აზროვნების თამაში"
+                    imageColor="bg-gradient-to-br from-teal-500 to-teal-700"
+                    tag="კლასიკა"
+                    onClick={() => onSelectGame(GameType.KALAKOBANA)}
+                    icon={<Map className="absolute right-[-20px] bottom-[-30px] w-52 h-52 text-white/10 rotate-6" strokeWidth={1.5} />}
                  />
              </div>
         </div>
@@ -1396,6 +1852,7 @@ export default function App() {
   const getBgColor = () => {
       if (activeGame === GameType.IMPOSTER) return 'bg-[#FF3B30]';
       if (activeGame === GameType.LIAR) return 'bg-[#4F46E5]';
+      if (activeGame === GameType.KALAKOBANA) return 'bg-teal-600';
       return 'bg-black';
   };
 
@@ -1413,6 +1870,10 @@ export default function App() {
 
           {activeGame === GameType.LIAR && (
               <LiarGame onBack={() => setActiveGame(null)} />
+          )}
+
+          {activeGame === GameType.KALAKOBANA && (
+              <KalakobanaGame onBack={() => setActiveGame(null)} />
           )}
       </div>
 
