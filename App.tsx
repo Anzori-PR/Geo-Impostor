@@ -1331,7 +1331,7 @@ const KalakobanaPlay = ({
          ) : (
            <div className="h-full flex flex-col items-center justify-center text-center p-6">
               <Map size={48} className="mb-6 text-teal-200/50 sm:w-16 sm:h-16" strokeWidth={1} />
-              <p className="text-teal-200 mb-8 text-sm sm:text-base leading-relaxed max-w-[80%] sm:max-w-xs mx-auto">{KALAKOBANA_UI_TEXT.rulesText}</p>
+              <p className="text-teal-200 mb-8 text-sm sm:max-w-xs mx-auto max-w-full">{KALAKOBANA_UI_TEXT.rulesText}</p>
               
               <button 
                  onClick={handleSpin}
@@ -1391,7 +1391,7 @@ const KalakobanaScoring = ({
         </div>
 
         <div className="flex-1 overflow-y-auto p-4 space-y-3 pb-32">
-           <p className="text-center text-gray-500 text-xs uppercase tracking-widest my-4"> დააჭირეთ ქულას მისანიჭებლად (0 -> 5 -> 10 -> 20)</p>
+           <p className="text-center text-gray-500 text-xs uppercase tracking-widest my-4"> დააჭირეთ ქულას მისანიჭებლად (0 -&gt; 5 -&gt; 10 -&gt; 20)</p>
            {categories.map((cat, idx) => {
              const score = scores[cat] || 0;
              const color = score === 0 ? 'bg-gray-700 text-gray-400' : score === 5 ? 'bg-orange-500/20 text-orange-500 border-orange-500' : score === 10 ? 'bg-teal-500/20 text-teal-500 border-teal-500' : 'bg-purple-500/20 text-purple-400 border-purple-500';
