@@ -46,7 +46,7 @@ export default defineConfig({
         name: 'იპოვე მატყუარა',
         short_name: 'იმპოსტერი',
         description: 'A collection of local multiplayer party games in Georgian: Guess the Imposter and Who is the Liar.',
-        theme_color: '#FF3B30',
+        theme_color: '#fff',
         background_color: '#1C1C1E',
         display: 'standalone',
         orientation: 'portrait',
