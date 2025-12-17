@@ -1486,7 +1486,7 @@ const KalakobanaGame = ({ onBack }: { onBack: () => void }) => {
 
 const Launcher = ({ onSelectGame }: { onSelectGame: (type: GameType) => void }) => {
     return (
-        <div className="h-full bg-[#0F0F11] text-white flex flex-col p-6 relative overflow-hidden font-['Noto_Sans_Georgian']">
+        <div className="h-full bg-[#0F0F11] text-white flex flex-col p-6 relative font-['Noto_Sans_Georgian']">
              {/* Ambient Background */}
              <div className="absolute top-[-10%] left-[-20%] w-[300px] h-[300px] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
              <div className="absolute bottom-[-10%] right-[-10%] w-[250px] h-[250px] bg-blue-600/10 rounded-full blur-[80px] pointer-events-none"></div>
@@ -1848,8 +1848,11 @@ export default function App() {
   };
 
   return (
-    <div className={`min-h-screen w-full overflow-hidden transition-colors duration-500 ${getBgColor()}`}>
-      <div className="h-full w-full md:max-w-md md:mx-auto shadow-2xl overflow-hidden relative flex flex-col">
+      <div
+      className={`min-h-screen w-full transition-colors duration-500 ${getBgColor()}
+      pt-[env(safe-area-inset-top)]
+      pb-[env(safe-area-inset-bottom)]`}>
+      <div className="h-full w-full md:max-w-md md:mx-auto shadow-2xl relative flex flex-col">
         <div className="flex-1 overflow-hidden relative h-full">
             {!activeGame && (
                 <Launcher onSelectGame={setActiveGame} />
