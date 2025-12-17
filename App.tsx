@@ -1491,7 +1491,7 @@ const Launcher = ({ onSelectGame }: { onSelectGame: (type: GameType) => void }) 
              <div className="absolute top-[-10%] left-[-20%] w-[300px] h-[300px] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
              <div className="absolute bottom-[-10%] right-[-10%] w-[250px] h-[250px] bg-blue-600/10 rounded-full blur-[80px] pointer-events-none"></div>
 
-             <div className="flex justify-center items-center mb-10 pt-8 z-10 safe-pt">
+             <div className="flex justify-center items-center mb-10 z-10 safe-pt">
                  <div>
                      <h1 className="text-2xl items-center font-black tracking-tight">გასართობი თამაშები</h1>
                      <p className="text-gray-500 text-center font-medium text-sm mt-1">აირჩიე თამაში და გაერთე</p>
@@ -1848,8 +1848,8 @@ export default function App() {
   };
 
   return (
-    <div className={`fixed inset-0 w-full h-full overflow-hidden transition-colors duration-500 ${getBgColor()}`}>
-      <div className="h-full w-full max-w-md mx-auto shadow-2xl overflow-hidden relative flex flex-col">
+    <div className={`min-h-screen w-full overflow-hidden transition-colors duration-500 ${getBgColor()}`}>
+      <div className="h-full w-full md:max-w-md md:mx-auto shadow-2xl overflow-hidden relative flex flex-col">
         <div className="flex-1 overflow-hidden relative h-full">
             {!activeGame && (
                 <Launcher onSelectGame={setActiveGame} />
