@@ -110,7 +110,7 @@ const PlayersScreen: React.FC<{
     return (
       <div className={`flex flex-col h-full ${color} text-white animate-fade-in`}>
         {/* Header */}
-        <div className="px-6 pt-12 pb-4 flex items-center gap-4 z-10">
+        <div className="px-6 safe-pt pb-4 flex items-center gap-4 z-10">
           <button onClick={onBack} className="w-10 h-10 flex items-center justify-center -ml-2 rounded-full hover:bg-white/10 transition-colors">
              <ChevronLeft size={32} />
           </button>
@@ -146,7 +146,7 @@ const PlayersScreen: React.FC<{
         </div>
   
         {/* Add Button */}
-        <div className="p-8 pb-12 flex justify-center z-20">
+        <div className="p-8 safe-pb flex justify-center z-20">
            <button 
              onClick={onAddPlayer}
              className="bg-[#1C1C1E] text-white font-bold py-4 px-8 rounded-full flex items-center gap-2 shadow-lg active:scale-95 transition-transform text-lg"
@@ -229,6 +229,7 @@ const CancelGameButton = ({ onConfirm }: { onConfirm: () => void }) => {
       <button 
         onClick={() => setShowConfirm(true)}
         className="absolute top-12 right-6 z-50 w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-red-500/80 transition-colors text-white border border-white/10 shadow-lg active:scale-95"
+        style={{ top: 'max(2rem, env(safe-area-inset-top) + 1rem)' }}
       >
         <X size={20} />
       </button>
@@ -272,7 +273,7 @@ const ImposterMainMenu = ({
     return (
       <div className="flex flex-col h-full bg-[#FF3B30] text-white overflow-hidden relative animate-fade-in">
          {/* Top Nav */}
-         <div className="px-6 pt-12 pb-4 flex justify-between items-center z-10">
+         <div className="px-6 safe-pt pb-4 flex justify-between items-center z-10">
             <button onClick={onBack} className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
                 <ChevronLeft size={24} />
             </button>
@@ -372,7 +373,7 @@ const ImposterMainMenu = ({
          </div>
   
          {/* Start Button */}
-         <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#FF3B30] via-[#FF3B30] to-transparent pt-12 z-20">
+         <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#FF3B30] via-[#FF3B30] to-transparent safe-pb z-20">
              <button 
                onClick={onStart}
                className="w-full bg-black text-white h-16 rounded-full text-xl font-black shadow-lg shadow-black/20 active:scale-95 transition-transform flex items-center justify-center gap-3 border border-white/10"
@@ -676,7 +677,7 @@ const LiarMainMenu = ({ onStart, onBack, playerCount, setPlayerCount, playerName
 
     return (
         <div className="flex flex-col h-full bg-[#4F46E5] text-white relative animate-fade-in">
-             <div className="px-6 pt-12 pb-4 flex justify-between items-center z-10">
+             <div className="px-6 safe-pt pb-4 flex justify-between items-center z-10">
                 <button onClick={onBack} className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
                     <ChevronLeft size={24} />
                 </button>
@@ -725,7 +726,7 @@ const LiarMainMenu = ({ onStart, onBack, playerCount, setPlayerCount, playerName
                  </div>
              </div>
 
-             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#4F46E5] via-[#4F46E5] to-transparent pt-12 z-20">
+             <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#4F46E5] via-[#4F46E5] to-transparent safe-pb z-20">
                  <button 
                    onClick={onStart}
                    className="w-full bg-[#1C1C1E] text-white h-16 rounded-full text-xl font-black shadow-lg active:scale-95 transition-transform flex items-center justify-center gap-3"
@@ -796,7 +797,7 @@ const LiarInput: React.FC<{ player: LiarPlayer, question: string, onSubmit: (ans
     return (
         <div className="h-full flex flex-col bg-[#4F46E5] relative overflow-hidden">
              {/* Header */}
-             <div className="px-6 pt-12 pb-4 flex justify-between items-center z-10">
+             <div className="px-6 safe-pt pb-4 flex justify-between items-center z-10">
                 <div className="w-10" /> 
                 <h1 className="text-xl font-bold text-white uppercase tracking-widest opacity-90">{LIAR_UI_TEXT.title}</h1>
                 <div className="w-10" />
@@ -871,7 +872,7 @@ const LiarBoard = ({ players, questionPair, onReveal, onRestart, showLiar }: { p
                 </div>
             )}
 
-            <div className="grid grid-cols-2 gap-4 pb-20 overflow-y-auto flex-1 scrollbar-hide relative z-10">
+            <div className="grid grid-cols-2 gap-4 safe-pb overflow-y-auto flex-1 scrollbar-hide relative z-10">
                 {players.map((player) => (
                     <div key={player.id} className={`relative bg-[#1C1C1E] p-4 rounded-3xl flex flex-col items-center justify-center aspect-square border-4 ${showLiar && player.isLiar ? 'border-red-500' : 'border-transparent'}`}>
                         <span className="text-gray-400 font-bold text-sm mb-2">{player.name}</span>
@@ -886,7 +887,7 @@ const LiarBoard = ({ players, questionPair, onReveal, onRestart, showLiar }: { p
                 ))}
             </div>
 
-            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#4F46E5] via-[#4F46E5] to-transparent pt-12 z-20">
+            <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#4F46E5] via-[#4F46E5] to-transparent safe-pb z-20">
                 {!showLiar ? (
                     <button 
                         onClick={onReveal}
@@ -1083,7 +1084,7 @@ const KalakobanaMainMenu = ({
 
   return (
     <div className="flex flex-col h-full bg-teal-600 text-white relative animate-fade-in">
-        <div className="px-6 pt-12 pb-4 flex justify-between items-center z-10">
+        <div className="px-6 safe-pt pb-4 flex justify-between items-center z-10">
           <button onClick={onBack} className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
               <ChevronLeft size={24} />
           </button>
@@ -1152,7 +1153,7 @@ const KalakobanaMainMenu = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-teal-600 via-teal-600 to-transparent pt-12 z-20 flex gap-4">
+        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-teal-600 via-teal-600 to-transparent safe-pb z-20 flex gap-4">
            {/* Manual Button */}
            <button 
              onClick={() => setShowLetterModal(true)}
@@ -1286,7 +1287,7 @@ const KalakobanaPlay = ({
   return (
     <div className="flex flex-col h-full bg-teal-600 text-white overflow-hidden relative">
        {/* Header with improved spacing */}
-       <div className="p-6 pt-12 flex justify-between items-center z-10 bg-teal-600 shadow-xl">
+       <div className="p-6 safe-pt flex justify-between items-center z-10 bg-teal-600 shadow-xl">
            <div className="flex items-center gap-4">
               <div className="bg-white text-teal-700 w-14 h-14 rounded-2xl flex items-center justify-center text-3xl font-black shadow-lg">
                 {displayedLetter}
@@ -1337,7 +1338,7 @@ const KalakobanaPlay = ({
 
        {/* Footer Button */}
        {currentLetter && (
-         <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-teal-600 via-teal-600 to-transparent pt-12 z-20">
+         <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-teal-600 via-teal-600 to-transparent safe-pb z-20">
             <button 
               onClick={() => onFinish(answers)}
               className="w-full bg-red-600 text-white h-16 rounded-2xl text-xl font-black shadow-lg active:scale-95 transition-transform flex items-center justify-center gap-2"
@@ -1371,7 +1372,7 @@ const KalakobanaScoring = ({
 
   return (
     <div className="flex flex-col h-full bg-[#1C1C1E] text-white">
-        <div className="p-6 pt-14 bg-[#2C2C2E] rounded-b-3xl shadow-2xl z-20">
+        <div className="p-6 safe-pt bg-[#2C2C2E] rounded-b-3xl shadow-2xl z-20">
            {/* Adjusted layout for calculator icon to be next to text and not overlap with exit button */}
            <div className="flex items-center gap-2 mb-1 justify-start">
              <Calculator className="text-teal-500" size={18} />
@@ -1403,7 +1404,7 @@ const KalakobanaScoring = ({
            })}
         </div>
 
-        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#1C1C1E] via-[#1C1C1E] to-transparent pt-12 z-20">
+        <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-[#1C1C1E] via-[#1C1C1E] to-transparent safe-pb z-20">
             <button 
               onClick={() => onComplete(totalScore)}
               className="w-full bg-teal-600 text-white h-16 rounded-2xl text-xl font-black shadow-lg active:scale-95 transition-transform"
@@ -1490,7 +1491,7 @@ const Launcher = ({ onSelectGame }: { onSelectGame: (type: GameType) => void }) 
              <div className="absolute top-[-10%] left-[-20%] w-[300px] h-[300px] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
              <div className="absolute bottom-[-10%] right-[-10%] w-[250px] h-[250px] bg-blue-600/10 rounded-full blur-[80px] pointer-events-none"></div>
 
-             <div className="flex justify-center items-center mb-10 pt-8 z-10">
+             <div className="flex justify-center items-center mb-10 pt-8 z-10 safe-pt">
                  <div>
                      <h1 className="text-2xl items-center font-black tracking-tight">გასართობი თამაშები</h1>
                      <p className="text-gray-500 text-center font-medium text-sm mt-1">აირჩიე თამაში და გაერთე</p>
@@ -1847,26 +1848,26 @@ export default function App() {
   };
 
   return (
-    <div className={`h-full w-full max-w-md mx-auto shadow-2xl overflow-hidden relative transition-colors duration-500 flex flex-col ${getBgColor()}`}>
-      
-      <div className="flex-1 overflow-hidden relative h-full">
-          {!activeGame && (
-              <Launcher onSelectGame={setActiveGame} />
-          )}
+    <div className={`fixed inset-0 w-full h-full overflow-hidden transition-colors duration-500 ${getBgColor()}`}>
+      <div className="h-full w-full max-w-md mx-auto shadow-2xl overflow-hidden relative flex flex-col">
+        <div className="flex-1 overflow-hidden relative h-full">
+            {!activeGame && (
+                <Launcher onSelectGame={setActiveGame} />
+            )}
 
-          {activeGame === GameType.IMPOSTER && (
-              <ImposterGame onBack={() => setActiveGame(null)} />
-          )}
+            {activeGame === GameType.IMPOSTER && (
+                <ImposterGame onBack={() => setActiveGame(null)} />
+            )}
 
-          {activeGame === GameType.LIAR && (
-              <LiarGame onBack={() => setActiveGame(null)} />
-          )}
+            {activeGame === GameType.LIAR && (
+                <LiarGame onBack={() => setActiveGame(null)} />
+            )}
 
-          {activeGame === GameType.KALAKOBANA && (
-              <KalakobanaGame onBack={() => setActiveGame(null)} />
-          )}
+            {activeGame === GameType.KALAKOBANA && (
+                <KalakobanaGame onBack={() => setActiveGame(null)} />
+            )}
+        </div>
       </div>
-      
     </div>
   );
 }

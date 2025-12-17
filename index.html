@@ -6,7 +6,6 @@
     <title>იპოვე მატყუარა</title>
     
     <!-- PWA Settings (Manifest is injected by VitePWA) -->
-    <meta name="theme-color" content="#1C1C1E">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <link rel="icon" type="image/png" href="./services/icon.png">
@@ -19,7 +18,16 @@
             font-family: 'Noto Sans Georgian', sans-serif;
             overscroll-behavior: none;
             -webkit-tap-highlight-color: transparent;
+            background-color: #000;
         }
+        /* Handle safe area top for fullscreen PWA */
+        .safe-pt {
+            padding-top: max(3rem, env(safe-area-inset-top) + 1rem);
+        }
+        .safe-pb {
+            padding-bottom: max(1.5rem, env(safe-area-inset-bottom) + 1rem);
+        }
+        
         .card-flip {
             perspective: 1000px;
         }
@@ -82,7 +90,7 @@
 }
 </script>
 </head>
-<body class="bg-gray-900 text-white h-screen w-screen overflow-hidden selection:bg-red-500 selection:text-white">
+<body class="bg-black text-white h-screen w-screen overflow-hidden selection:bg-red-500 selection:text-white">
     <div id="root" class="h-full w-full"></div>
     <!-- Entry point for Vite -->
     <script type="module" src="/index.tsx"></script>
