@@ -2,7 +2,7 @@
   "name": "Georgian Party Games",
   "short_name": "PartyGames",
   "start_url": ".",
-  "display": "standalone",
+  "display": "fullscreen",
   "background_color": "#1C1C1E",
   "theme_color": "#FF3B30",
   "orientation": "portrait",

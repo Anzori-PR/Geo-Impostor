@@ -53,16 +53,6 @@ const ListRow = ({
   </div>
 );
 
-const AdBanner = () => (
-  <div className="w-full h-[60px] bg-[#121212] border-t border-white/10 flex flex-col items-center justify-center z-50 shrink-0 relative overflow-hidden">
-    {/* Placeholder pattern */}
-    <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(#ffffff 1px, transparent 1px)', backgroundSize: '10px 10px' }}></div>
-    
-    <span className="text-[10px] font-bold text-gray-500 uppercase tracking-widest z-10 bg-[#121212] px-2">Advertisement</span>
-    <div className="text-gray-600 text-xs mt-1 z-10">Banner Ad Space (Reserved)</div>
-  </div>
-);
-
 const Modal = ({ 
   isOpen, 
   onClose, 
@@ -1876,9 +1866,6 @@ export default function App() {
               <KalakobanaGame onBack={() => setActiveGame(null)} />
           )}
       </div>
-
-      {/* Fixed Ad Banner at bottom */}
-      <AdBanner />
       
     </div>
   );
