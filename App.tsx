@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
-import { AlertCircle, Clock, Users, Play, Trophy, ArrowUp, Lock, Pencil, Ghost, LayoutGrid, Timer, HelpCircle, X, Sparkles, Search, Lightbulb, Repeat, Home, ChevronLeft, User, Flame, Plus, ChevronRight, Check, Keyboard, Map, RefreshCw, Trash2, Calculator, RotateCcw } from 'lucide-react';
+import { AlertCircle, Clock, Users, Play, Trophy, ArrowUp, Lock, Pencil, Save, Ghost, LayoutGrid, Timer, HelpCircle, X, Sparkles, Search, Lightbulb, Repeat, Home, ChevronLeft, User, Flame, Plus, ChevronRight, Check, Keyboard, Map, RefreshCw, Trash2, Calculator, RotateCcw } from 'lucide-react';
 import { GameState, GameStage, CategoryId, Player, WordItem, GameType, LiarGameState, LiarPlayer, LiarQuestionPair } from './types';
 import { UI_TEXT, CATEGORIES, DEFAULT_PLAYER_COUNT, DEFAULT_TIMER_MINUTES, LIAR_UI_TEXT, LIAR_QUESTIONS, LIAR_GAME_CATEGORIES, KALAKOBANA_UI_TEXT, GEORGIAN_ALPHABET, DEFAULT_KALAKOBANA_CATEGORIES } from './constants';
 import { generateGameWords } from './services/geminiService';
@@ -108,7 +108,7 @@ const PlayersScreen: React.FC<{
     defaultName
   }) => {
     return (
-      <div className={`flex flex-col h-full ${color} text-white animate-fade-in`}>
+      <div className={`flex flex-col h-screen ${color} text-white animate-fade-in`}>
         {/* Header */}
         <div className="px-6 safe-pt pb-4 flex items-center gap-4 z-10">
           <button onClick={onBack} className="w-10 h-10 flex items-center justify-center -ml-2 rounded-full hover:bg-white/10 transition-colors">
@@ -119,7 +119,7 @@ const PlayersScreen: React.FC<{
   
         {/* List */}
         <div className="flex-1 overflow-y-auto px-4 py-4 scrollbar-hide z-10">
-           <div className="bg-[#1C1C1E] rounded-3xl overflow-hidden shadow-xl">
+           <div className="bg-[#1C1C1E] rounded-3xl overflow-hiddenl">
               {Array.from({ length: count }).map((_, idx) => (
                  <div key={idx} className="flex items-center justify-between p-5 border-b border-white/10 last:border-0 group">
                     <input
@@ -143,16 +143,28 @@ const PlayersScreen: React.FC<{
                  </div>
               ))}
            </div>
-        </div>
+        
   
         {/* Add Button */}
-        <div className="p-8 safe-pb flex justify-center z-20">
+        <div className="p-8 pt-2 flex justify-center z-20">
            <button 
              onClick={onAddPlayer}
              className="bg-[#1C1C1E] text-white font-bold py-4 px-8 rounded-full flex items-center gap-2 shadow-lg active:scale-95 transition-transform text-lg"
            >
               <Plus size={24} />
               {UI_TEXT.addPlayer}
+           </button>
+        </div>
+
+        </div>
+        
+        <div className="p-8 bottom-5 flex justify-center z-20">
+           <button 
+             onClick={onBack}
+             className="bg-black text-white font-bold py-4 px-24 rounded-full flex items-center gap-2 shadow-lg active:scale-95 transition-transform text-lg"
+           >
+              <Save size={24} />
+              {UI_TEXT.save}
            </button>
         </div>
       </div>
@@ -242,7 +254,7 @@ const CancelGameButton = ({ onConfirm }: { onConfirm: () => void }) => {
 const ImposterMainMenu = ({ 
     onStart, onBack, playerCount, setPlayerCount, onAddPlayer, onRemovePlayer, selectedCategory, setSelectedCategory, 
     customTopic, setCustomTopic, playerNames, setPlayerName, timerEnabled, setTimerEnabled, 
-    timerDuration, setTimerDuration, hintsEnabled, setHintsEnabled
+    timerDuration, setTimerDuration, hintsEnabled, setHintsEnabled, imposterCount, setImposterCount
 }: any) => {
     const [showCategoryModal, setShowCategoryModal] = useState(false);
     const [showRules, setShowRules] = useState(false);
@@ -253,6 +265,12 @@ const ImposterMainMenu = ({
     const handleDurationClick = () => {
       const next = timerDuration === 3 ? 5 : timerDuration === 5 ? 7 : timerDuration === 7 ? 10 : 3;
       setTimerDuration(next);
+    };
+
+    const handleImposterCountClick = () => {
+        const maxImposters = Math.floor((playerCount - 1) / 2) || 1;
+        const next = imposterCount >= maxImposters ? 1 : imposterCount + 1;
+        setImposterCount(next);
     };
 
     if (showPlayersScreen) {
@@ -286,19 +304,7 @@ const ImposterMainMenu = ({
   
          {/* Header */}
          <div className="px-6 pb-8 text-center z-10 flex flex-col items-center">
-            <img 
-               src="/imposter-logo.png" 
-               alt={UI_TEXT.title} 
-               className="w-48 h-auto object-contain drop-shadow-[0_0_15px_rgba(255,0,0,0.5)] mb-2"
-               onError={(e) => {
-                   e.currentTarget.style.display = 'none';
-                   // Fallback to text if image fails
-                   const textEl = document.getElementById('fallback-title');
-                   if (textEl) textEl.style.display = 'block';
-               }}
-            />
-            {/* Fallback Title (Hidden by default unless img errors) */}
-            <h1 id="fallback-title" className="hidden text-5xl font-black uppercase tracking-tight drop-shadow-md font-['Noto_Sans_Georgian']">
+            <h1 id="fallback-title" className="text-5xl font-black uppercase tracking-tight drop-shadow-md font-['Noto_Sans_Georgian']">
               {UI_TEXT.title}
             </h1>
             <p className="text-white/80 font-medium mt-2">Georgian Party Game</p>
@@ -320,10 +326,11 @@ const ImposterMainMenu = ({
                 <ListRow 
                   icon={Ghost} 
                   label={UI_TEXT.impostors} 
-                  value="1"
-                  hasChevron={false}
+                  value={imposterCount.toString()}
+                  hasChevron={true}
                   color="text-purple-400"
                   bgIcon="bg-purple-400/20"
+                  onClick={handleImposterCountClick}
                 />
                 <ListRow 
                   icon={Lightbulb} 
@@ -446,7 +453,7 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
         currentWord: '',
         currentWordHint: '',
         currentCategory: CategoryId.EASY,
-        imposterIndex: -1,
+        imposterIndices: [],
         activePlayerRevealIndex: 0,
         timerSeconds: DEFAULT_TIMER_MINUTES * 60,
         winningTeam: null,
@@ -454,6 +461,7 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
     });
 
     const [playerCount, setPlayerCount] = useState(DEFAULT_PLAYER_COUNT);
+    const [imposterCount, setImposterCount] = useState(1);
     const [playerNames, setPlayerNames] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [timerEnabled, setTimerEnabled] = useState(false); // Default to false
@@ -487,6 +495,9 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
         newNames.splice(index, 1);
         setPlayerNames(newNames);
         setPlayerCount(c => c - 1);
+        // Ensure imposter count doesn't exceed new limit
+        const maxImposters = Math.floor((playerCount - 2) / 2) || 1;
+        if (imposterCount > maxImposters) setImposterCount(maxImposters);
     };
 
     const getRandomWord = async (catId: CategoryId, customPrompt?: string): Promise<WordItem> => {
@@ -508,12 +519,20 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
 
     const startGame = async () => {
         const selectedWordItem = await getRandomWord(gameState.currentCategory, gameState.customCategoryPrompt);
-        const imposterIdx = Math.floor(Math.random() * playerCount);
+        
+        const indices: number[] = [];
+        const count = Math.min(imposterCount, playerCount - 1);
+        while (indices.length < count) {
+            const idx = Math.floor(Math.random() * playerCount);
+            if (!indices.includes(idx)) {
+                indices.push(idx);
+            }
+        }
         
         const newPlayers: Player[] = Array.from({ length: playerCount }, (_, i) => ({
           id: i,
           name: playerNames[i]?.trim() || `${UI_TEXT.playerDefaultName} ${i + 1}`,
-          isImposter: i === imposterIdx,
+          isImposter: indices.includes(i),
           voteCount: 0,
           isAlive: true
         }));
@@ -526,7 +545,7 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
           players: newPlayers,
           currentWord: selectedWordItem.word,
           currentWordHint: selectedWordItem.hint,
-          imposterIndex: imposterIdx,
+          imposterIndices: indices,
           activePlayerRevealIndex: 0,
           winningTeam: null,
           timerSeconds: gameSeconds
@@ -586,7 +605,7 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
     return (
         <>
             {gameState.stage !== GameStage.MENU && (
-                <CancelGameButton onConfirm={onBack} />
+                <CancelGameButton onConfirm={resetGame} />
             )}
 
             {gameState.stage === GameStage.MENU && (
@@ -595,6 +614,8 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
                     onBack={onBack}
                     playerCount={playerCount}
                     setPlayerCount={setPlayerCount}
+                    imposterCount={imposterCount}
+                    setImposterCount={setImposterCount}
                     onAddPlayer={handleAddPlayer}
                     onRemovePlayer={handleRemovePlayer}
                     selectedCategory={gameState.currentCategory}
@@ -653,12 +674,18 @@ const ImposterGame = ({ onBack }: { onBack: () => void }) => {
 
 // --- GAME 2: WHO'S THE LIAR COMPONENTS ---
 
-const LiarMainMenu = ({ onStart, onBack, playerCount, setPlayerCount, playerNames, setPlayerName, onAddPlayer, onRemovePlayer, selectedCategory, setSelectedCategory }: any) => {
+const LiarMainMenu = ({ onStart, onBack, playerCount, setPlayerCount, playerNames, setPlayerName, onAddPlayer, onRemovePlayer, selectedCategory, setSelectedCategory, setLiarCount, liarCount }: any) => {
     const [showCategoryModal, setShowCategoryModal] = useState(false);
     const [showRules, setShowRules] = useState(false);
     const [showPlayersScreen, setShowPlayersScreen] = useState(false);
 
     const currentCategoryLabel = LIAR_GAME_CATEGORIES.find(c => c.id === selectedCategory)?.label || 'Random';
+
+    const handleLiarCountClick = () => {
+      const maxLiar = Math.floor((playerCount - 1) / 2) || 1;
+      const next = liarCount >= maxLiar ? 1 : liarCount + 1;
+      setLiarCount(next);
+    };
 
     if (showPlayersScreen) {
         return (
@@ -707,10 +734,11 @@ const LiarMainMenu = ({ onStart, onBack, playerCount, setPlayerCount, playerName
                      <ListRow 
                         icon={Ghost} 
                         label={LIAR_UI_TEXT.liars} 
-                        value="1"
-                        hasChevron={false}
+                        value={liarCount.toString()}
+                        hasChevron={true}
                         color="text-red-400"
                         bgIcon="bg-red-400/20"
+                        onClick={handleLiarCountClick}
                     />
                      <ListRow 
                         icon={LayoutGrid} 
@@ -916,6 +944,7 @@ const LiarGame = ({ onBack }: { onBack: () => void }) => {
         activePlayerIndex: 0
     });
     const [playerCount, setPlayerCount] = useState(DEFAULT_PLAYER_COUNT);
+    const [liarCount, setLiarCount] = useState(1);
     const [playerNames, setPlayerNames] = useState<string[]>([]);
     const [selectedCategory, setSelectedCategory] = useState('ALL');
     const [showLiar, setShowLiar] = useState(false);
@@ -940,6 +969,9 @@ const LiarGame = ({ onBack }: { onBack: () => void }) => {
         newNames.splice(index, 1);
         setPlayerNames(newNames);
         setPlayerCount(c => c - 1);
+
+        const maxLiar = Math.floor((playerCount - 2) / 2) || 1;
+        if (liarCount > maxLiar) setLiarCount(maxLiar);
     };
 
     const handlePlayerNameChange = (index: number, name: string) => {
@@ -951,16 +983,24 @@ const LiarGame = ({ onBack }: { onBack: () => void }) => {
     const startGame = () => {
         let questionsPool = LIAR_QUESTIONS;
         if (selectedCategory !== 'ALL') {
-             const filtered = LIAR_QUESTIONS.filter(q => q.category === selectedCategory);
-             if (filtered.length > 0) questionsPool = filtered;
+          const filtered = LIAR_QUESTIONS.filter(q => q.category === selectedCategory);
+          if (filtered.length > 0) questionsPool = filtered;
         }
         const question = questionsPool[Math.floor(Math.random() * questionsPool.length)];
-        const liarIndex = Math.floor(Math.random() * playerCount);
+        const indices: number[] = [];
+        const count = Math.min(liarCount, playerCount - 1);
+        while (indices.length < count){
+          const liarIndex = Math.floor(Math.random() * playerCount);
+          if (!indices.includes(liarIndex)) {
+            indices.push(liarIndex);
+          }
+        }
+        
         
         const newPlayers: LiarPlayer[] = Array.from({ length: playerCount }, (_, i) => ({
           id: i,
           name: playerNames[i]?.trim() || `${UI_TEXT.playerDefaultName} ${i + 1}`,
-          isLiar: i === liarIndex,
+          isLiar: indices.includes(i),
           answer: ''
         }));
     
@@ -995,7 +1035,7 @@ const LiarGame = ({ onBack }: { onBack: () => void }) => {
     return (
         <>
             {gameState.stage !== 'MENU' && (
-                <CancelGameButton onConfirm={onBack} />
+                <CancelGameButton onConfirm={() => setGameState(prev => ({ ...prev, stage: 'MENU' }))} />
             )}
 
             {gameState.stage === 'MENU' && (
@@ -1004,6 +1044,8 @@ const LiarGame = ({ onBack }: { onBack: () => void }) => {
                     onBack={onBack}
                     playerCount={playerCount}
                     setPlayerCount={setPlayerCount}
+                    liarCount={liarCount}
+                    setLiarCount={setLiarCount}
                     onAddPlayer={handleAddPlayer}
                     onRemovePlayer={handleRemovePlayer}
                     playerNames={playerNames}
@@ -1789,7 +1831,7 @@ const Results = ({
     onReset: () => void,
     onContinue: () => void
 }) => {
-    const imposter = state.players.find(p => p.isImposter);
+    const imposters = state.players.filter(p => p.isImposter);
     const imposterWon = state.winningTeam === 'imposter';
 
     return (
@@ -1804,9 +1846,9 @@ const Results = ({
             </h1>
             
             <div className="bg-black/40 p-8 rounded-3xl backdrop-blur-md w-full max-w-sm mt-8 border border-white/10 shadow-2xl">
-                <p className="text-white/70 text-xs uppercase tracking-[0.2em] mb-2">{UI_TEXT.imposterWas}</p>
+                <p className="text-white/70 text-xs uppercase tracking-[0.2em] mb-2">{imposters.length > 1 ? UI_TEXT.impostors : UI_TEXT.imposterWas}</p>
                 <div className="text-4xl font-black text-white mb-8 flex flex-col items-center justify-center gap-2">
-                     {imposter?.name}
+                     {imposters.map(i => i.name).join(", ")}
                 </div>
 
                 <div className="h-px bg-white/20 w-full mb-8"></div>

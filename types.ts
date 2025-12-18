@@ -1,5 +1,3 @@
-
-
 export enum GameStage {
   MENU = 'MENU',
   REVEAL = 'REVEAL',
@@ -36,7 +34,7 @@ export interface GameState {
   currentWord: string;
   currentWordHint: string;
   currentCategory: CategoryId;
-  imposterIndex: number;
+  imposterIndices: number[];
   activePlayerRevealIndex: number;
   timerSeconds: number;
   winningTeam: 'imposter' | 'citizens' | null;
