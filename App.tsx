@@ -144,21 +144,19 @@ const PlayersScreen: React.FC<{
               ))}
            </div>
         
-  
-        {/* Add Button */}
-        <div className="p-8 pt-2 flex justify-center z-20">
-           <button 
-             onClick={onAddPlayer}
-             className="bg-[#1C1C1E] text-white font-bold py-4 px-8 rounded-full flex items-center gap-2 shadow-lg active:scale-95 transition-transform text-lg"
-           >
-              <Plus size={24} />
-              {UI_TEXT.addPlayer}
-           </button>
+          {/* Add Button */}
+          <div className="p-4 pt-2 flex justify-center z-20">
+            <button 
+              onClick={onAddPlayer}
+              className="bg-[#1C1C1E] text-white font-bold py-4 px-8 rounded-full flex items-center gap-2 shadow-lg active:scale-95 transition-transform text-lg"
+            >
+                <Plus size={24} />
+                {UI_TEXT.addPlayer}
+            </button>
+          </div>
         </div>
 
-        </div>
-        
-        <div className="p-8 bottom-5 flex justify-center z-20">
+        <div className="p-8 safe-pb bottom-5 flex justify-center z-20">
            <button 
              onClick={onBack}
              className="bg-black text-white font-bold py-4 px-24 rounded-full flex items-center gap-2 shadow-lg active:scale-95 transition-transform text-lg"
@@ -1528,7 +1526,7 @@ const KalakobanaGame = ({ onBack }: { onBack: () => void }) => {
 
 const Launcher = ({ onSelectGame }: { onSelectGame: (type: GameType) => void }) => {
     return (
-        <div className="h-full bg-[#0F0F11] text-white flex flex-col p-6 relative overflow-hidden font-['Noto_Sans_Georgian']">
+        <div className="h-screen bg-[#0F0F11] text-white flex flex-col p-6 relative overflow-hidden font-['Noto_Sans_Georgian']">
              {/* Ambient Background */}
              <div className="absolute top-[-10%] left-[-20%] w-[300px] h-[300px] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
              <div className="absolute bottom-[-10%] right-[-10%] w-[250px] h-[250px] bg-blue-600/10 rounded-full blur-[80px] pointer-events-none"></div>
