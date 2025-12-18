@@ -108,7 +108,7 @@ const PlayersScreen: React.FC<{
     defaultName
   }) => {
     return (
-      <div className={`flex flex-col h-screen ${color} text-white animate-fade-in`}>
+      <div className={`flex flex-col h-full ${color} text-white animate-fade-in`}>
         {/* Header */}
         <div className="px-6 safe-pt pb-4 flex items-center gap-4 z-10">
           <button onClick={onBack} className="w-10 h-10 flex items-center justify-center -ml-2 rounded-full hover:bg-white/10 transition-colors">
@@ -1526,7 +1526,7 @@ const KalakobanaGame = ({ onBack }: { onBack: () => void }) => {
 
 const Launcher = ({ onSelectGame }: { onSelectGame: (type: GameType) => void }) => {
     return (
-        <div className="h-screen bg-[#0F0F11] text-white flex flex-col p-6 relative overflow-hidden font-['Noto_Sans_Georgian']">
+        <div className="h-full bg-[#0F0F11] text-white flex flex-col p-6 relative overflow-hidden font-['Noto_Sans_Georgian']">
              {/* Ambient Background */}
              <div className="absolute top-[-10%] left-[-20%] w-[300px] h-[300px] bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
              <div className="absolute bottom-[-10%] right-[-10%] w-[250px] h-[250px] bg-blue-600/10 rounded-full blur-[80px] pointer-events-none"></div>
