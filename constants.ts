@@ -229,7 +229,136 @@ export const CATEGORIES: Category[] = [
       { word: "უთო", hint: "ტანსაცმელი" },
       { word: "შამპუნი", hint: "აბაზანა" },
       { word: "ტაფა", hint: "შეწვა" },
-      { word: "ჩაიდანი", hint: "დუღილი" }
+      { word: "ჩაიდანი", hint: "დუღილი" },
+
+      { word: "ექიმი", hint: "მკურნალობა" },
+      { word: "მასწავლებელი", hint: "სკოლა" },
+      { word: "მეხანძრე", hint: "ცეცხლი" },
+      { word: "პოლიციელი", hint: "უსაფრთხოება" },
+      { word: "მზარეული", hint: "სამზარეულო" },
+      { word: "მძღოლი", hint: "მართვა" },
+      { word: "მშენებელი", hint: "მშენებლობა" },
+      { word: "მევაჭრე", hint: "ბაზარი" },
+      { word: "მეკვლე", hint: "დღესასწაული" },
+      { word: "მხატვარი", hint: "ნახატი" },
+
+      { word: "ჩაქუჩი", hint: "ლურსმანი" },
+      { word: "ხრახნდამჭერი", hint: "ხრახნი" },
+      { word: "სახრახნისი", hint: "მოტრიალება" },
+      { word: "სახერხი", hint: "ჭრა" },
+      { word: "საზომი ლენტი", hint: "სიგრძე" },
+      { word: "ფანარი", hint: "ბნელში" },
+      { word: "მაკრატელი", hint: "ქაღალდი" },
+      { word: "კალათამ", hint: "ნაგავი" },
+      { word: "ვედრო", hint: "წყალი" },
+      { word: "საწმენდი ჯაგრისი", hint: "დასუფთავება" },
+      
+      { word: "სიხარული", hint: "ღიმილი" },
+      { word: "გაბრაზება", hint: "ემოცია" },
+      { word: "დაღლა", hint: "ძილი" },
+      { word: "სიყვარული", hint: "გული" },
+      { word: "მოტივაცია", hint: "ენერგია" },
+      { word: "იმედი", hint: "მომავალი" },
+      { word: "მარტოობა", hint: "სიმარტოვე" },
+      { word: "ნდობა", hint: "ურთიერთობა" },
+      { word: "ეჭვი", hint: "კითხვა" },
+      { word: "გაოცება", hint: "სიურპრიზი" },
+      
+      { word: "კარტი", hint: "თამაში" },
+      { word: "დომინო", hint: "ქვები" },
+      { word: "ლოტო", hint: "ციფრები" },
+      { word: "კონსოლი", hint: "ვიდეოთამაში" },
+      { word: "ჯოისტიკი", hint: "მართვა" },
+      { word: "ფაზლი", hint: "აწყობა" },
+      { word: "ლაბირინთი", hint: "გზა" },
+      { word: "თოჯინა", hint: "სათამაშო" },
+      { word: "ბურთულები", hint: "სათამაშო" },
+      { word: "ბატუტი", hint: "ხტომა" },
+      
+      { word: "წვიმა", hint: "ღრუბელი" },
+      { word: "ქარი", hint: "ქროლვა" },
+      { word: "ქარიშხალი", hint: "სტიქია" },
+      { word: "ელვა", hint: "ცაზე" },
+      { word: "ჭექა-ქუხილი", hint: "ხმაური" },
+      { word: "მზე ამოდის", hint: "დილა" },
+      { word: "დასავლეთი", hint: "მზე ჩადის" },
+      { word: "მდინარე", hint: "დინება" },
+      { word: "ტბა", hint: "წყალი" },
+      { word: "მთა", hint: "სიმაღლე" },
+      
+      // Food & Objects (Hard)
+      { word: "ვაშლი", hint: "დაცემა" },          // ნიუტონი, ცოდნა
+      { word: "ხინკალი", hint: "შიგნით" },        // შიგთავსი
+      { word: "ყავა", hint: "გაღვიძება" },
+      { word: "ღვინო", hint: "სუფრა" },
+      { word: "შოკოლადი", hint: "ცდუნება" },
+      { word: "პური", hint: "დღიური" },
+      { word: "ნაყინი", hint: "დნობა" },
+      
+      // Places (Hard)
+      { word: "სკოლა", hint: "ზარი" },
+      { word: "საავადმყოფო", hint: "მორიგეობა" },
+      { word: "ბანკი", hint: "ნდობა" },
+      { word: "აეროპორტი", hint: "დალოდება" },
+      { word: "კინოთეატრი", hint: "ბნელში" },
+      { word: "სტადიონი", hint: "ხმაური" },
+      { word: "პარკი", hint: "ჩრდილი" },
+      
+      // Transport (Hard)
+      { word: "მანქანა", hint: "საცობი" },
+      { word: "მეტრო", hint: "ქვემოთ" },
+      { word: "თვითმფრინავი", hint: "დროის სხვაობა" },
+      { word: "ველოსიპედი", hint: "ბალანსი" },
+      { word: "მარშრუტკა", hint: "სივიწროვე" },
+      
+      // Animals & Nature (Hard)
+      { word: "ძაღლი", hint: "ერთგულება" },
+      { word: "კატა", hint: "დამოუკიდებლობა" },
+      { word: "ობობა", hint: "ხაფანგი" },
+      { word: "თევზი", hint: "სიჩუმე" },
+      { word: "ხე", hint: "ფესვები" },
+      { word: "ყვავილი", hint: "წამიერი" },
+      
+      // Objects (Hard)
+      { word: "სარკე", hint: "თავი" },
+      { word: "საათი", hint: "ლოდინი" },
+      { word: "გასაღები", hint: "წვდომა" },
+      { word: "კარი", hint: "გადაწყვეტილება" },
+      { word: "ტელეფონი", hint: "შეტყობინება" },
+      { word: "ყურსასმენი", hint: "იზოლაცია" },
+      
+      // Abstract / Concepts (Hard)
+      { word: "შიში", hint: "თავდაცვა" },
+      { word: "სიზმარი", hint: "რეალობისგან გაქცევა" },
+      { word: "იმედი", hint: "ხვალ" },
+      { word: "სიჩუმე", hint: "დაძაბულობა" },
+      { word: "ხმაური", hint: "დაკარგვა" },
+      { word: "დრო", hint: "არ ბრუნდება" },
+      
+      // Activities (Hard)
+      { word: "ცეკვა", hint: "სხეულის ენა" },
+      { word: "ჭადრაკი", hint: "ერთი ნაბიჯით ადრე" },
+      { word: "ფეხბურთი", hint: "ერთადერთი გოლი" },
+      { word: "ხატვა", hint: "შიდა ხმა" },
+      { word: "წერა", hint: "წაშლა" },
+      
+      // Body (Hard)
+      { word: "გული", hint: "რიტმი" },
+      { word: "თვალი", hint: "შეხვედრა" },
+      { word: "ტვინი", hint: "შეცდომები" },
+      { word: "ხელი", hint: "მიცემა" },
+      { word: "სისხლი", hint: "კავშირი" },
+      
+      { word: "კარი", hint: "ორი მხარე" },
+      { word: "მთვარე", hint: "სესხებული შუქი" },
+      { word: "მზე", hint: "უსასყიდლო ენერგია" },
+      { word: "სარკე", hint: "სხვისი თვალით ნახვა" },
+      { word: "სახლი", hint: "დაბრუნება" },
+      { word: "მდინარე", hint: "ერთხელვე არა" },
+      { word: "დრო", hint: "ყველაზე ძვირი ვალუტა" },
+      { word: "ჩრდილი", hint: "შენ გვერდით" },
+      { word: "ცეცხლი", hint: "მეგობარიც და მტერიც" },
+      { word: "ყინული", hint: "დროებით" },
     ]
   },
   {
@@ -245,7 +374,81 @@ export const CATEGORIES: Category[] = [
       { word: "ინსომნია", hint: "მდგომარეობა" },
       { word: "კარმა", hint: "რწმენა" },
       { word: "ნოსტალგია", hint: "გრძნობა" },
-      { word: "ირონია", hint: "იუმორი" }
+      { word: "ირონია", hint: "იუმორი" },
+
+      // Food & Objects (Hard)
+      { word: "ვაშლი", hint: "დაცემა" },        
+      { word: "ხინკალი", hint: "შიგნით" },        
+      { word: "ყავა", hint: "გაღვიძება" },
+      { word: "ღვინო", hint: "სუფრა" },
+      { word: "შოკოლადი", hint: "ცდუნება" },
+      { word: "პური", hint: "დღიური" },
+      { word: "ნაყინი", hint: "დნობა" },
+      
+      // Places (Hard)
+      { word: "სკოლა", hint: "ზარი" },
+      { word: "საავადმყოფო", hint: "მორიგეობა" },
+      { word: "ბანკი", hint: "ნდობა" },
+      { word: "აეროპორტი", hint: "დალოდება" },
+      { word: "კინოთეატრი", hint: "ბნელში" },
+      { word: "სტადიონი", hint: "ხმაური" },
+      { word: "პარკი", hint: "ჩრდილი" },
+      
+      // Transport (Hard)
+      { word: "მანქანა", hint: "საცობი" },
+      { word: "მეტრო", hint: "ქვემოთ" },
+      { word: "თვითმფრინავი", hint: "დროის სხვაობა" },
+      { word: "ველოსიპედი", hint: "ბალანსი" },
+      { word: "მარშრუტკა", hint: "სივიწროვე" },
+      
+      // Animals & Nature (Hard)
+      { word: "ძაღლი", hint: "ერთგულება" },
+      { word: "კატა", hint: "დამოუკიდებლობა" },
+      { word: "ობობა", hint: "ხაფანგი" },
+      { word: "თევზი", hint: "სიჩუმე" },
+      { word: "ხე", hint: "ფესვები" },
+      { word: "ყვავილი", hint: "წამიერი" },
+      
+      // Objects (Hard)
+      { word: "სარკე", hint: "თავი" },
+      { word: "საათი", hint: "ლოდინი" },
+      { word: "გასაღები", hint: "წვდომა" },
+      { word: "კარი", hint: "გადაწყვეტილება" },
+      { word: "ტელეფონი", hint: "შეტყობინება" },
+      { word: "ყურსასმენი", hint: "იზოლაცია" },
+      
+      // Abstract / Concepts (Hard)
+      { word: "შიში", hint: "თავდაცვა" },
+      { word: "სიზმარი", hint: "რეალობისგან გაქცევა" },
+      { word: "იმედი", hint: "ხვალ" },
+      { word: "სიჩუმე", hint: "დაძაბულობა" },
+      { word: "ხმაური", hint: "დაკარგვა" },
+      { word: "დრო", hint: "არ ბრუნდება" },
+      
+      // Activities (Hard)
+      { word: "ცეკვა", hint: "სხეულის ენა" },
+      { word: "ჭადრაკი", hint: "ერთი ნაბიჯით ადრე" },
+      { word: "ფეხბურთი", hint: "ერთადერთი გოლი" },
+      { word: "ხატვა", hint: "შიდა ხმა" },
+      { word: "წერა", hint: "წაშლა" },
+      
+      // Body (Hard)
+      { word: "გული", hint: "რიტმი" },
+      { word: "თვალი", hint: "შეხვედრა" },
+      { word: "ტვინი", hint: "შეცდომები" },
+      { word: "ხელი", hint: "მიცემა" },
+      { word: "სისხლი", hint: "კავშირი" },
+      
+      { word: "კარი", hint: "ორი მხარე" },
+      { word: "მთვარე", hint: "სესხებული შუქი" },
+      { word: "მზე", hint: "უსასყიდლო ენერგია" },
+      { word: "სარკე", hint: "სხვისი თვალით ნახვა" },
+      { word: "სახლი", hint: "დაბრუნება" },
+      { word: "მდინარე", hint: "ერთხელვე არა" },
+      { word: "დრო", hint: "ყველაზე ძვირი ვალუტა" },
+      { word: "ჩრდილი", hint: "შენ გვერდით" },
+      { word: "ცეცხლი", hint: "მეგობარიც და მტერიც" },
+      { word: "ყინული", hint: "დროებით" },
     ]
   },
   {
@@ -312,388 +515,83 @@ export const LIAR_GAME_CATEGORIES = [
 ];
 
 export const LIAR_QUESTIONS: LiarQuestionPair[] = [
-    // --- NUMBERS ---
-    { 
-        id: '1', 
-        truthQuestion: "რამდენჯერ იბან ფეხებს წელიწადში?", 
-        liarQuestion: "რამდენი დღეა წელიწადში?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '2', 
-        truthQuestion: "რამდენი კილოგრამია შენი იდეალური წონა?", 
-        liarQuestion: "რამდენი წლის არის შენი ბებია?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '5', 
-        truthQuestion: "რამდენი ლარი გაქვს საფულეში?", 
-        liarQuestion: "რამდენი თითი გაქვს ხელზე?", 
-        category: "NUMBERS" 
-    },
-     { 
-        id: '8', 
-        truthQuestion: "რამდენი მეგობარი გყავს?", 
-        liarQuestion: "რამდენი თვალი აქვს ადამიანს?", 
-        category: "NUMBERS" 
-    },
-    {
-        id: '10',
-        truthQuestion: "რამდენი საათი გძინავს ღამით?",
-        liarQuestion: "რამდენი ფეხი აქვს ობობას?",
-        category: "NUMBERS"
-    },
-    {
-        id: '11',
-        truthQuestion: "რა ზომა ფეხსაცმელს ატარებ?",
-        liarQuestion: "რამდენი კბილი აქვს ზრდასრულ ადამიანს?",
-        category: "NUMBERS"
-    },
-    {
-        id: '16',
-        truthQuestion: "რამდენი პროცენტია შენი ტელეფონის ელემენტი?",
-        liarQuestion: "რამდენი წუთია ერთ საათში?",
-        category: "NUMBERS"
-    },
-    { 
-        id: '19', 
-        truthQuestion: "რამდენი სართულია შენს სახლში?", 
-        liarQuestion: "რამდენი კონტინენტია დედამიწაზე?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '20', 
-        truthQuestion: "რამდენი ოთახია შენს სახლში?", 
-        liarQuestion: "რამდენი ფერია ცისარტყელაში?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '27', 
-        truthQuestion: "რამდენ ლიტრ წყალს სვამ დღეში?", 
-        liarQuestion: "რამდენი ბორბალი აქვს მანქანას?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '30', 
-        truthQuestion: "რამდენი წყვილი ფეხსაცმელი გაქვს?", 
-        liarQuestion: "რამდენი დღეა კვირაში?", 
-        category: "NUMBERS" 
-    },
+    // ID 1 - harder
+{ 
+  id: '1',
+  truthQuestion: "რამდენჯერ იბან ფეხებს კვირაში?",
+  liarQuestion: "რამდენჯერ იბან ხელებს კვირაში?",
+  category: "NUMBERS"
+},
 
-    // --- PERSONAL ---
-    { 
-        id: '4', 
-        truthQuestion: "სად გძინავს ხოლმე?", 
-        liarQuestion: "სად ატარებ ყველაზე დიდ დროს", 
-        category: "PERSONAL" 
-    },
-    { 
-        id: '6', 
-        truthQuestion: "რომელ საათზე იძინებ?", 
-        liarQuestion: "რომელ საათზე იღვიძებ?", 
-        category: "PERSONAL" 
-    },
-    {
-        id: '12',
-        truthQuestion: "სად ისურვებდი მოგზაურობას?",
-        liarQuestion: "სად ცხოვრობენ პინგვინები?",
-        category: "PERSONAL"
-    },
-    {
-        id: '13',
-        truthQuestion: "რა მიირთვი საუზმეზე?",
-        liarQuestion: "რა არის შენი საყვარელი ხილი?",
-        category: "PERSONAL"
-    },
-    {
-        id: '17',
-        truthQuestion: "სად გაიცანი შენი საუკეთესო მეგობარი?",
-        liarQuestion: "სად იყიდე ეგ ტანსაცმელი?",
-        category: "PERSONAL"
-    },
-    { 
-        id: '21', 
-        truthQuestion: "რა ჰქვია შენს მამას?", 
-        liarQuestion: "რა ჰქვია საქართველოს პრეზიდენტს?", 
-        category: "PERSONAL" 
-    },
-    { 
-        id: '22', 
-        truthQuestion: "რა ფერის თვალები გაქვს?", 
-        liarQuestion: "რა ფერის არის ლიმონი?", 
-        category: "PERSONAL" 
-    },
-    { 
-        id: '25', 
-        truthQuestion: "რა პროფესიის ხარ?", 
-        liarQuestion: "ვინ აქრობს ცეცხლს?", 
-        category: "PERSONAL" 
-    },
-    { 
-        id: '28', 
-        truthQuestion: "რომელ უცხო ენას ფლობ?", 
-        liarQuestion: "რომელ ენას არ ისწავლიდი არასდროს", 
-        category: "PERSONAL" 
-    },
+// ID 5 - harder
+{ 
+  id: '5',
+  truthQuestion: "რამდენი ლარი გაქვს საფულეში?",
+  liarQuestion: "რამდენი ლარი გაქვს ჯიბეში?",
+  category: "NUMBERS"
+},
 
-    // --- FUN ---
-    { 
-        id: '3', 
-        truthQuestion: "რა ფერის არის მარწყვი?", 
-        liarQuestion: "რა ფერის არის ბალახი?", 
-        category: "FUN" 
-    },
-    { 
-        id: '7', 
-        truthQuestion: "რა არის შენი საყვარელი სასმელი?", 
-        liarQuestion: "რითი იბან ხელებს?", 
-        category: "FUN" 
-    },
-    {
-        id: '9',
-        truthQuestion: "რა ცხოველი იქნებოდი?",
-        liarQuestion: "რა ცხოველი ყეფს?",
-        category: "FUN"
-    },
-    {
-        id: '14',
-        truthQuestion: "რომელ სუპერძალას აირჩევდი?",
-        liarQuestion: "რა იქნებოდი რომ არა ადამიანი?",
-        category: "FUN"
-    },
-    {
-        id: '15',
-        truthQuestion: "რა არის შენი საყვარელი ფილმი?",
-        liarQuestion: "რომელი ზღაპარი გიყვარდა ბავშვობაში?",
-        category: "FUN"
-    },
-    {
-        id: '18',
-        truthQuestion: "რა ნივთს წაიღებდი უკაცრიელ კუნძულზე?",
-        liarQuestion: "რა გაჩუქეს დაბადების დღეზე?",
-        category: "FUN"
-    },
-    { 
-        id: '23', 
-        truthQuestion: "სად დაიმალებოდი ზომბების აპოკალიფსის დროს?", 
-        liarQuestion: "რით მგზავრობ ყველაზე არაკომფორტულად?", 
-        category: "FUN" 
-    },
-    { 
-        id: '24', 
-        truthQuestion: "რომელია შენი საყვარელი სოციალური ქსელი?", 
-        liarQuestion: "რომელ აპლიკაციას წაშლიდი ტელეფონიდან?", 
-        category: "FUN" 
-    },
-    { 
-        id: '26', 
-        truthQuestion: "რა არის ყველაზე უცნაური რამ რაც გიჭამია?", 
-        liarQuestion: "რა არის ყველაზე გემრიელი ქართული კერძი?", 
-        category: "FUN" 
-    },
-    { 
-        id: '29', 
-        truthQuestion: "რომელ ცნობილ ადამიანს ისურვებდი ვახშამზე?", 
-        liarQuestion: "ვინ არის შენი საყვარელი მომღერალი?", 
-        category: "FUN" 
-    },
-    { 
-        id: '30', 
-        truthQuestion: "რა სუპერძალას აირჩევდი?", 
-        liarQuestion: "რა არის შენი ყველაზე დიდი ფობია?", 
-        category: "FUN" 
-    },
-    { 
-        id: '31', 
-        truthQuestion: "რას გააკეთებდი, ლატარიაში რომ მოიგო?", 
-        liarQuestion: "რას მოიპარავდი, პოლიცია რომ არ არსებობდეს?", 
-        category: "FUN" 
-    },
-    { 
-        id: '32', 
-        truthQuestion: "რომელ ისტორიულ ეპოქაში იცხოვრებდი?", 
-        liarQuestion: "რომელ ქვეყანაში წახვიდოდი დასასვენებლად?", 
-        category: "FUN" 
-    },
-    { 
-        id: '33', 
-        truthQuestion: "რა პროფესიას აირჩევდი, ფული რომ არ გჭირდებოდეს?", 
-        liarQuestion: "რა სამსახურს ვერ იმუშავებდი ვერასდროს?", 
-        category: "FUN" 
-    },
-    { 
-        id: '34', 
-        truthQuestion: "რომელ ცხოველს ჰგავხარ ხასიათით?", 
-        liarQuestion: "რომელი ცხოველი გეზიზღება?", 
-        category: "FUN" 
-    },
-    { 
-        id: '35', 
-        truthQuestion: "სად წახვიდოდი პირველ პაემანზე?", 
-        liarQuestion: "სად დაშორდი შენს ყოფილ შეყვარებულს?", 
-        category: "FUN" 
-    },
-    { 
-        id: '36', 
-        truthQuestion: "რა თვისებას აფასებ ადამიანში ყველაზე მეტად?", 
-        liarQuestion: "რა თვისება გაღიზიანებს ადამიანში ყველაზე მეტად?", 
-        category: "FUN" 
-    },
-    { 
-        id: '37', 
-        truthQuestion: "ვინ არის შენი ბავშვობის 'კრაში' (Crush)?", 
-        liarQuestion: "ვინ არის შენი საყვარელი მასწავლებელი?", 
-        category: "FUN" 
-    },
-    { 
-        id: '38', 
-        truthQuestion: "რომელი ფილმის ყურება შეგიძლია უსასრულოდ?", 
-        liarQuestion: "რომელ ფილმზე ჩაგეძინა ბოლოს?", 
-        category: "FUN" 
-    },
-    { 
-        id: '39', 
-        truthQuestion: "რა ჟანრის მუსიკას უსმენ მარტო ყოფნისას?", 
-        liarQuestion: "რა მუსიკა გაღიზიანებს?", 
-        category: "FUN" 
-    },
-    { 
-        id: '40', 
-        truthQuestion: "რომელი იუთუბერი/ინფლუენსერი მოგწონს?", 
-        liarQuestion: "ვის დაბლოკავდი სოციალურ ქსელში?", 
-        category: "FUN" 
-    },
-    { 
-        id: '41', 
-        truthQuestion: "რომელ ქართული ტრადიცია არ მოგწონს?", 
-        liarQuestion: "რას აკეთებ ხოლმე ახალ წელს?", 
-        category: "FUN" 
-    },
-    { 
-        id: '42', 
-        truthQuestion: "რომელ ქალაქში იცხოვრებდი საქართველოში (თბილისის გარდა)?", 
-        liarQuestion: "სად გაატარე ბოლო ზაფხული?", 
-        category: "FUN" 
-    },
-    { 
-        id: '43', 
-        truthQuestion: "ყველაზე მეტად რა გენატრება ბავშვობიდან?", 
-        liarQuestion: "რა არის შენი საყვარელი დესერტი?", 
-        category: "FUN" 
-    },
-    { 
-        id: '44', 
-        truthQuestion: "რისი კეთება გეზარება ყველაზე მეტად?", 
-        liarQuestion: "რისი კეთება გიყვარს წვიმიან ამინდში?", 
-        category: "FUN" 
-    },
-    { 
-        id: '45', 
-        truthQuestion: "რამდენ ენაზე საუბრობ?", 
-        liarQuestion: "რამდენი ხელი აქვს ადამიანს?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '46', 
-        truthQuestion: "რამდენი და-ძმა გყავს?", 
-        liarQuestion: "რამდენი ბორბალი აქვს ველოსიპედს?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '47', 
-        truthQuestion: "რომელ თვეშია შენი დაბადების დღე (რიცხვი)?", 
-        liarQuestion: "რომელი საათია ახლა (დაახლოებით)?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '48', 
-        truthQuestion: "რამდენი შინაური ცხოველი გყავს?", 
-        liarQuestion: "რამდენი პრეზიდენტი ჰყავს ქვეყანას?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '49', 
-        truthQuestion: "რამდენჯერ ჭამ დღეში?", 
-        liarQuestion: "რამდენი ფერია საქართველოს დროშაზე?", 
-        category: "NUMBERS" 
-    },
-    { 
-        id: '50', 
-        truthQuestion: "რომელ ქალაქში ცხოვრობ?", 
-        liarQuestion: "რა არის საქართველოს დედაქალაქი?", 
-        // Hint: If they live in Tbilisi, the answer is "Tbilisi" for both.
-        category: "PERSONAL" 
-    },
-    { 
-        id: '51', 
-        truthQuestion: "რა ფერის თვალები გაქვს?", 
-        liarQuestion: "რა ფერის არის შოკოლადი?", 
-        // Hint: If brown eyes, answer "ყავისფერი" fits both.
-        category: "PERSONAL" 
-    },
-    { 
-        id: '52', 
-        truthQuestion: "რა გქვია?", 
-        liarQuestion: "რა სახელია ყველაზე გავრცელებული საქართველოში?", 
-        // Hint: Works well if the person has a common name (Giorgi, Nino, etc.).
-        category: "PERSONAL" 
-    },
-    { 
-        id: '53', 
-        truthQuestion: "რას სვამ ყველაზე ხშირად?", 
-        liarQuestion: "რა მიედინება მდინარეში?", 
-        // Hint: Answer "Water" (წყალი).
-        category: "PERSONAL" 
-    },
-    { 
-        id: '54', 
-        truthQuestion: "რა გაცვია ფეხზე?", 
-        liarQuestion: "რას იცვამენ სპორტსმენები ვარჯიშისას?", 
-        // Hint: Answer "Sneakers" (ბოტასი/კეტები).
-        category: "PERSONAL" 
-    },
-    { 
-        id: '55', 
-        truthQuestion: "რომელია შენი საყვარელი ფერი?", 
-        liarQuestion: "რა ფერისაა ცა?", 
-        // Hint: Answer "Blue" (ლურჯი) is a very common favorite color.
-        category: "FUN" 
-    },
-    { 
-        id: '56', 
-        truthQuestion: "რისი კეთება გიყვარს ღამით?", 
-        liarQuestion: "რას აკეთებს ადამიანი როცა დაღლილია?", 
-        // Hint: Answer "Sleep" (ძილი).
-        category: "FUN" 
-    },
-    { 
-        id: '57', 
-        truthQuestion: "რომელია შენი საყვარელი წელიწადის დრო?", 
-        liarQuestion: "როდის არის ყველაზე ცხელი ამინდი?", 
-        // Hint: Answer "Summer" (ზაფხული).
-        category: "FUN" 
-    },
-    { 
-        id: '58', 
-        truthQuestion: "რა ნივთი გიჭირავს ხელში ყველაზე ხშირად?", 
-        liarQuestion: "რითი რეკავ მეგობართან?", 
-        // Hint: Answer "Phone" (ტელეფონი).
-        category: "FUN" 
-    },
-    { 
-        id: '59', 
-        truthQuestion: "რას აკეთებ, როცა ძალიან სასაცილო რამეს ხედავ?", 
-        liarQuestion: "რას აკეთებ, როცა კარგ ხასიათზე ხარ?", 
-        // Hint: Answer "Laugh" (ვიცინი).
-        category: "FUN" 
-    },
-    { 
-        id: '60', 
-        truthQuestion: "სად გიყვარს დასვენება?", 
-        liarQuestion: "სად არის ბევრი მარილიანი წყალი?", 
-        // Hint: Answer "Sea" (ზღვა).
-        category: "FUN" 
-    }
+// ID 4 - harder
+{ 
+  id: '4',
+  truthQuestion: "სად გძინავს ხოლმე?",
+  liarQuestion: "სად ისვენებ ხოლმე ყველაზე ხშირად?",
+  category: "PERSONAL"
+},
+
+// ID 7 - harder
+{ 
+  id: '7',
+  truthQuestion: "რა არის შენი საყვარელი სასმელი?",
+  liarQuestion: "რა არის შენი საყვარელი ცხელი სასმელი?",
+  category: "FUN"
+},
+
+// ID 23 - harder
+{ 
+  id: '23',
+  truthQuestion: "სად დაიმალებოდი ზომბების აპოკალიფსის დროს?",
+  liarQuestion: "სად დაიმალებოდი ქარიშხლის დროს?",
+  category: "FUN"
+},
+{ id: '61', truthQuestion: "რამდენი შეტყობინება გაქვს unread?", liarQuestion: "რამდენი ზარი გაქვს გამოტოვებული?", category: "NUMBERS" },
+{ id: '62', truthQuestion: "რამდენი პროცენტია ტელეფონი ახლა?", liarQuestion: "რამდენი პროცენტით გაქვს ხმის დონე?", category: "NUMBERS" },
+{ id: '63', truthQuestion: "რამდენი ნაბიჯი გადაგიდგამს დღეს (დაახლოებით)?", liarQuestion: "რამდენი წუთი იარე დღეს (დაახლოებით)?", category: "NUMBERS" },
+{ id: '64', truthQuestion: "რამდენი აპლიკაცია გაქვს ტელეფონში (დაახლოებით)?", liarQuestion: "რამდენი ფოტო გაქვს ტელეფონში (დაახლოებით)?", category: "NUMBERS" },
+{ id: '65', truthQuestion: "რამდენი ჭიქა წყალს სვამ დღეში?", liarQuestion: "რამდენი ჭიქა ჩაი/ყავას სვამ დღეში?", category: "NUMBERS" },
+{ id: '66', truthQuestion: "რამდენი საათი გძინავს ღამით?", liarQuestion: "რამდენი საათი გძინავს 24 საათში მთლიანად?", category: "NUMBERS" },
+{ id: '67', truthQuestion: "რამდენი მეგობარი გყავს ტელეფონში შენახული?", liarQuestion: "რამდენი კონტაქტი გყავს ტელეფონში?", category: "NUMBERS" },
+{ id: '68', truthQuestion: "რამდენი ლარი გიფიქსირდება ბარათზე (დაახლოებით)?", liarQuestion: "რამდენი ლარი გაქვს ნაღდი (დაახლოებით)?", category: "NUMBERS" },
+{ id: '69', truthQuestion: "რამდენჯერ ჭამ დღეში?", liarQuestion: "რამდენჯერ სვამ რამეს დღეში?", category: "NUMBERS" },
+{ id: '70', truthQuestion: "რამდენი კილომეტრი გივლია ამ თვეში (დაახლოებით)?", liarQuestion: "რამდენი კილომეტრი გივლია ამ კვირაში (დაახლოებით)?", category: "NUMBERS" },
+
+{ id: '71', truthQuestion: "რომელი სიტყვა გიხასიათებს ყველაზე მეტად?", liarQuestion: "რომელი სიტყვა გაღიზიანებს ყველაზე მეტად?", category: "PERSONAL" },
+{ id: '72', truthQuestion: "რა გააკეთე ბოლო დროს პირველად?", liarQuestion: "რა გააკეთე ბოლო დროს მეორედ?", category: "PERSONAL" },
+{ id: '73', truthQuestion: "ვინ გწერს ყველაზე ხშირად?", liarQuestion: "ვის წერ ყველაზე ხშირად?", category: "PERSONAL" },
+{ id: '74', truthQuestion: "რა გაბედე ბოლოს?", liarQuestion: "რა ვერ გაბედე ბოლოს?", category: "PERSONAL" },
+{ id: '75', truthQuestion: "რა გიყვარს ბავშვობიდან?", liarQuestion: "რა გიყვარდა ბავშვობაში ყველაზე მეტად?", category: "PERSONAL" },
+{ id: '76', truthQuestion: "სად იყავი ბოლოს გასეირნებაზე?", liarQuestion: "სად იქნებოდი ახლა რომ შეგეძლოს?", category: "PERSONAL" },
+{ id: '77', truthQuestion: "რას აკეთებ როცა ნერვიულობ?", liarQuestion: "რას აკეთებ როცა გაბრაზებული ხარ?", category: "PERSONAL" },
+{ id: '78', truthQuestion: "რა არის შენი ყველაზე ძლიერი მხარე?", liarQuestion: "რა არის შენი ყველაზე სუსტი მხარე?", category: "PERSONAL" },
+{ id: '79', truthQuestion: "რის გამო გემადლიერებიან ხოლმე?", liarQuestion: "რის გამო გეჩხუბებიან ხოლმე?", category: "PERSONAL" },
+{ id: '80', truthQuestion: "ვინ იყო ბოლო ადამიანი ვისთანაც ილაპარაკე?", liarQuestion: "ვინ იყო პირველი ადამიანი ვისთანაც ილაპარაკე დღეს?", category: "PERSONAL" },
+
+{ id: '81', truthQuestion: "რომელ ფილმში ისურვებდი ცხოვრებას?", liarQuestion: "რომელ ფილმში ვერ იცხოვრებდი ვერასდროს?", category: "FUN" },
+{ id: '82', truthQuestion: "რა გაგრძნობინებს თავს ძლიერად?", liarQuestion: "რა გაგრძნობინებს თავს სუსტად?", category: "FUN" },
+{ id: '83', truthQuestion: "რა სუპერძალას აირჩევდი?", liarQuestion: "რა სუპერძალა გეცოდინებოდა ცუდად?", category: "FUN" },
+{ id: '84', truthQuestion: "რომელი ნივთი გახსოვს ბავშვობიდან?", liarQuestion: "რომელი სუნი გახსოვს ბავშვობიდან?", category: "FUN" },
+{ id: '85', truthQuestion: "რომელი ცხოველი იქნებოდი?", liarQuestion: "რომელი ცხოველი გეყოლებოდა?", category: "FUN" },
+{ id: '86', truthQuestion: "რა არის შენი 'გილטי პლეზური'?", liarQuestion: "რა არის შენი ყველაზე უტყუარი გემო?", category: "FUN" },
+{ id: '87', truthQuestion: "რომელი თამაში მოგწონს ყველაზე მეტად?", liarQuestion: "რომელი თამაში გეზარება ყველაზე მეტად?", category: "FUN" },
+{ id: '88', truthQuestion: "რა შეგრცხვებოდა საზოგადოებაში?", liarQuestion: "რა გაგაცინებდა საზოგადოებაში?", category: "FUN" },
+{ id: '89', truthQuestion: "რას გააკეთებდი რომ ერთ დღეში მილიონერი გახდე?", liarQuestion: "რას გააკეთებდი რომ ერთ დღეში გაქრეს ფული?", category: "FUN" },
+{ id: '90', truthQuestion: "სად წახვიდოდი მარტო?", liarQuestion: "სად წახვიდოდი მეგობრებთან ერთად?", category: "FUN" },
+
+{ id: '91', truthQuestion: "რა ჭამე ბოლოს?", liarQuestion: "რა დალიე ბოლოს?", category: "FUN" },
+{ id: '92', truthQuestion: "სად ხარ ახლა?", liarQuestion: "სად იყავი 1 საათის წინ?", category: "PERSONAL" },
+{ id: '93', truthQuestion: "ვინ მოგენატრა?", liarQuestion: "ვინ გაგახსენდა?", category: "PERSONAL" },
+{ id: '94', truthQuestion: "რა გინდა ახლა?", liarQuestion: "რა გინდოდა დილით?", category: "PERSONAL" },
+{ id: '95', truthQuestion: "რა გესიზმრა ბოლოს?", liarQuestion: "რა გახსოვს ბავშვობიდან ბოლოს?", category: "FUN" },
 ];
 
 export const DEFAULT_PLAYER_COUNT = 3;
