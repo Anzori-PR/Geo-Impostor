@@ -822,13 +822,6 @@ const LiarInput: React.FC<{ player: LiarPlayer, question: string, onSubmit: (ans
 
     return (
         <div className="h-full flex flex-col bg-[#4F46E5] relative overflow-hidden">
-             {/* Header */}
-             <div className="px-6 safe-pt pb-4 flex justify-between items-center z-10">
-                <div className="w-10" /> 
-                <h1 className="text-xl font-bold text-white uppercase tracking-widest opacity-90">{LIAR_UI_TEXT.title}</h1>
-                <div className="w-10" />
-             </div>
-
              {/* Main Content */}
              <div className="flex-1 flex flex-col items-center justify-center p-6 z-10 -mt-10">
                 <div className="w-full max-w-sm aspect-[4/3] bg-[#121212] rounded-[2rem] border-[3px] border-white shadow-2xl flex flex-col items-center justify-between p-8 relative">
@@ -1412,7 +1405,7 @@ const KalakobanaScoring = ({
 
   return (
     <div className="flex flex-col h-full bg-[#1C1C1E] text-white">
-        <div className="p-6 safe-pt bg-[#2C2C2E] rounded-b-3xl shadow-2xl z-20">
+        <div className="px-6 pb-6 safe-pt bg-[#2C2C2E] rounded-b-3xl shadow-2xl z-20">
            {/* Adjusted layout for calculator icon to be next to text and not overlap with exit button */}
            <div className="flex items-center gap-2 mb-1 justify-start">
              <Calculator className="text-teal-500" size={18} />
