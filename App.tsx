@@ -4,6 +4,7 @@ import { AlertCircle, Clock, Users, Play, Trophy, ArrowUp, Lock, Pencil, Save, G
 import { GameState, GameStage, CategoryId, Player, WordItem, GameType, LiarGameState, LiarPlayer, LiarQuestionPair } from './types';
 import { UI_TEXT, CATEGORIES, DEFAULT_PLAYER_COUNT, DEFAULT_TIMER_MINUTES, LIAR_UI_TEXT, LIAR_QUESTIONS, LIAR_GAME_CATEGORIES, KALAKOBANA_UI_TEXT, GEORGIAN_ALPHABET, DEFAULT_KALAKOBANA_CATEGORIES } from './constants';
 import { generateGameWords } from './services/geminiService';
+import { Analytics } from "@vercel/analytics/react";
 
 // --- Shared Helper Components ---
 
@@ -1908,6 +1909,7 @@ export default function App() {
             )}
         </div>
       </div>
+      <Analytics />
     </div>
   );
 }
