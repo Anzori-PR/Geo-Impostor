@@ -4,7 +4,6 @@ import { AlertCircle, Clock, Users, Play, Trophy, ArrowUp, Lock, Pencil, Save, G
 import { GameState, GameStage, CategoryId, Player, WordItem, GameType, LiarGameState, LiarPlayer, LiarQuestionPair } from './types';
 import { UI_TEXT, CATEGORIES, DEFAULT_PLAYER_COUNT, DEFAULT_TIMER_MINUTES, LIAR_UI_TEXT, LIAR_QUESTIONS, LIAR_GAME_CATEGORIES, KALAKOBANA_UI_TEXT, GEORGIAN_ALPHABET, DEFAULT_KALAKOBANA_CATEGORIES } from './constants';
 import { generateGameWords } from './services/geminiService';
-import { Analytics } from "@vercel/analytics/react";
 
 // --- Shared Helper Components ---
 
@@ -239,8 +238,8 @@ const CancelGameButton = ({ onConfirm }: { onConfirm: () => void }) => {
       )}
       <button 
         onClick={() => setShowConfirm(true)}
-        className="absolute top-12 right-6 z-50 w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-red-500/80 transition-colors text-white border border-white/10 shadow-lg active:scale-95"
-        style={{ top: 'max(2rem, env(safe-area-inset-top) + 1rem)' }}
+        className="absolute right-6 z-[60] w-10 h-10 bg-black/20 backdrop-blur-md rounded-full flex items-center justify-center hover:bg-red-500/80 transition-colors text-white border border-white/10 shadow-lg active:scale-95"
+        style={{ top: 'calc(max(3rem, env(safe-area-inset-top) + 1rem) + 0.5rem)' }}
       >
         <X size={20} />
       </button>
@@ -1328,7 +1327,7 @@ const KalakobanaPlay = ({
   return (
     <div className="flex flex-col h-full bg-teal-600 text-white overflow-hidden relative">
        {/* Header with improved spacing */}
-       <div className="p-6 safe-pt flex justify-between items-center z-10 bg-teal-600 shadow-xl">
+       <div className="px-6 pb-6 safe-pt flex justify-between items-center sticky top-0 z-50 bg-teal-600 shadow-xl">
            <div className="flex items-center gap-4">
               <div className="bg-white text-teal-700 w-14 h-14 rounded-2xl flex items-center justify-center text-3xl font-black shadow-lg">
                 {displayedLetter}
@@ -1909,7 +1908,6 @@ export default function App() {
             )}
         </div>
       </div>
-      <Analytics />
     </div>
   );
 }
